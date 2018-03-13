@@ -4,7 +4,7 @@ class DBConfig {
 
     private static String ip = "localhost";
     private static String port = "3306";
-    private static String dbName = "expense";
+    private static String dbName = "myexpense";
     private static String username = "root";
     private static String password = "12345";
 

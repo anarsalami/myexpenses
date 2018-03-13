@@ -1,4 +1,3 @@
-
 package myexpensesswing;
 
 import beans.User;
@@ -15,7 +14,9 @@ import beans.UserRole;
  * @author User
  */
 public final class Roles extends javax.swing.JFrame {
+
     UserRoleDAOInter userRoleDao = new UserRoleDAOImpl();
+
     /**
      * Creates new form Roles
      */
@@ -23,36 +24,34 @@ public final class Roles extends javax.swing.JFrame {
         initComponents();
         refreshTable();
     }
-    public void refreshTable(){
+
+    public void refreshTable() {
         DefaultTableModel tm = RoleDefaultTableModel();
         jTable1.setModel(tm);
     }
-    
+
     public DefaultTableModel RoleDefaultTableModel() {
 
-    // names of columns
+        // names of columns
         Vector<String> columnNames = new Vector<>();
         columnNames.add("id");
         columnNames.add("Role");
 
-    // data of the table
+        // data of the table
         Vector<Vector<Object>> setrlerToplusu = new Vector<>();
         List<UserRole> list = userRoleDao.selectRoles();
         list.stream().map((u) -> {
             Vector<Object> setr = new Vector<>();
             setr.add(u.getId());
             setr.add(u.getName());
-        return setr;
-    }).forEachOrdered((setr) -> {
-        setrlerToplusu.add(setr);
-    });
-        
-    DefaultTableModel dtm= new DefaultTableModel(setrlerToplusu, columnNames);
-    return dtm;
-}
-    
-    
-    
+            return setr;
+        }).forEachOrdered((setr) -> {
+            setrlerToplusu.add(setr);
+        });
+
+        DefaultTableModel dtm = new DefaultTableModel(setrlerToplusu, columnNames);
+        return dtm;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -76,15 +75,15 @@ public final class Roles extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2"
-            }
+                new Object[][]{
+                    {null, null},
+                    {null, null},
+                    {null, null},
+                    {null, null}
+                },
+                new String[]{
+                    "Title 1", "Title 2"
+                }
         ));
         jScrollPane1.setViewportView(jTable1);
 
@@ -125,88 +124,88 @@ public final class Roles extends javax.swing.JFrame {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton1)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton2))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(roleId, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(40, 40, 40)
-                                .addComponent(jLabel1)))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(roleName)
-                            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(31, Short.MAX_VALUE))
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addGap(30, 30, 30)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                        .addGroup(layout.createSequentialGroup()
+                                                                .addComponent(jButton1)
+                                                                .addGap(18, 18, 18)
+                                                                .addComponent(jButton2))
+                                                        .addGroup(layout.createSequentialGroup()
+                                                                .addComponent(jLabel2)
+                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                                .addComponent(roleId, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addGap(40, 40, 40)
+                                                                .addComponent(jLabel1)))
+                                                .addGap(18, 18, 18)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                        .addComponent(roleName)
+                                                        .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addContainerGap(31, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(27, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(roleName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1)
-                    .addComponent(roleId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(17, 17, 17))
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addContainerGap(27, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(roleName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel1)
+                                        .addComponent(roleId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel2))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jButton1)
+                                        .addComponent(jButton2)
+                                        .addComponent(jButton3))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(17, 17, 17))
         );
 
         pack();
     }// </editor-fold>                        
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
         String name = roleName.getText();
-       
+
         UserRole userRole = new UserRole();
         userRole.setName(name);
-        
+
         userRoleDao.insertRole(userRole);
         refreshTable();
-    }                                        
+    }
 
-    private void roleNameActionPerformed(java.awt.event.ActionEvent evt) {                                         
+    private void roleNameActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
-    }                                        
+    }
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        
-        int answer = JOptionPane.showConfirmDialog(null, "Selected row will be deleted. Are you sure?", "Column DELETE!",JOptionPane.YES_NO_OPTION);
-      if(answer == JOptionPane.OK_OPTION){
-         int selectedRow= jTable1.getSelectedRow();
-         int id = Integer.valueOf(String.valueOf(jTable1.getModel().getValueAt(selectedRow, 0)));
-         userRoleDao.deleteRole(id);
-         refreshTable();
-      }
-    }                                        
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-            String ids = roleId.getText();
-            String name = roleName.getText();
-            int id = Integer.parseInt(ids);
-            
-            UserRole userRole = new UserRole();
-            userRole.setName(name);
-            userRole.setId(id);
-            userRoleDao.updateRole(id, userRole);
+        int answer = JOptionPane.showConfirmDialog(null, "Selected row will be deleted. Are you sure?", "Column DELETE!", JOptionPane.YES_NO_OPTION);
+        if (answer == JOptionPane.OK_OPTION) {
+            int selectedRow = jTable1.getSelectedRow();
+            int id = Integer.valueOf(String.valueOf(jTable1.getModel().getValueAt(selectedRow, 0)));
+            userRoleDao.deleteRole(id);
             refreshTable();
-                    
-    }                                        
+        }
+    }
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {
+        String ids = roleId.getText();
+        String name = roleName.getText();
+        int id = Integer.parseInt(ids);
+
+        UserRole userRole = new UserRole();
+        userRole.setName(name);
+        userRole.setId(id);
+        userRoleDao.updateRole(id, userRole);
+        refreshTable();
+
+    }
 
     /**
      * @param args the command line arguments

@@ -6,7 +6,7 @@
 package myexpensesswing;
 
 import beans.ExpenseCategory;
-import dao.ExpenseCategoryDAOImpl;
+import dao.impl.ExpenseCategoryDAOImpl;
 import java.awt.Button;
 import java.util.List;
 import java.util.Vector;

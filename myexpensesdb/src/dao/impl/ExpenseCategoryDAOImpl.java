@@ -1,7 +1,7 @@
-package dao;
+package dao.impl;
 
+import dao.inter.ExpenseCategoryDAOInter;
 import beans.ExpenseCategory;
-import static dao.UserDAOImpl.getInsertId;
 import dbutility.DBUtility;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
