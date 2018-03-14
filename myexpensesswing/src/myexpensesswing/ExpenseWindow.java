@@ -41,6 +41,7 @@ public class ExpenseWindow extends javax.swing.JFrame {
         textFieldTypeId = new javax.swing.JTextField();
         labelCategoryId = new javax.swing.JLabel();
         textFieldCategoryId = new javax.swing.JTextField();
+        btnReturn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -84,11 +85,11 @@ public class ExpenseWindow extends javax.swing.JFrame {
         });
 
         textFieldTitle.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
-                textFieldTitleInputMethodTextChanged(evt);
-            }
             public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
                 textFieldTitleCaretPositionChanged(evt);
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+                textFieldTitleInputMethodTextChanged(evt);
             }
         });
         textFieldTitle.addActionListener(new java.awt.event.ActionListener() {
@@ -193,6 +194,13 @@ public class ExpenseWindow extends javax.swing.JFrame {
                 .addGap(35, 35, 35))
         );
 
+        btnReturn.setText("Return");
+        btnReturn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReturnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -200,8 +208,11 @@ public class ExpenseWindow extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panelTop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(panelTop, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnReturn)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -210,8 +221,10 @@ public class ExpenseWindow extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(panelTop, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 371, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnReturn)
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         pack();
@@ -335,6 +348,11 @@ public class ExpenseWindow extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_textFieldSearchActionPerformed
 
+    private void btnReturnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReturnActionPerformed
+      this.setVisible(false);
+       new MainWindow().setVisible(true);
+    }//GEN-LAST:event_btnReturnActionPerformed
+
     public static void main(String args[]) {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -394,6 +412,7 @@ public class ExpenseWindow extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnReturn;
     private javax.swing.JButton buttonAdd;
     private javax.swing.JButton buttonDelete;
     private javax.swing.JButton buttonEdit;

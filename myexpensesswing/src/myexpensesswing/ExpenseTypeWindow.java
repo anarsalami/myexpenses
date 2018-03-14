@@ -34,6 +34,7 @@ public class ExpenseTypeWindow extends javax.swing.JFrame {
         tblType = new javax.swing.JTable();
         txtSearch = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
+        btnReturn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -44,11 +45,11 @@ public class ExpenseTypeWindow extends javax.swing.JFrame {
         jLabel2.setText("Expense Type");
 
         txtName.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
-                txtNameInputMethodTextChanged(evt);
-            }
             public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
                 txtNameCaretPositionChanged(evt);
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+                txtNameInputMethodTextChanged(evt);
             }
         });
         txtName.addActionListener(new java.awt.event.ActionListener() {
@@ -110,6 +111,13 @@ public class ExpenseTypeWindow extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         jLabel3.setText("Search : ");
 
+        btnReturn.setText("Return");
+        btnReturn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReturnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -135,6 +143,10 @@ public class ExpenseTypeWindow extends javax.swing.JFrame {
                             .addComponent(btnUpdate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 132, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnReturn)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -156,7 +168,9 @@ public class ExpenseTypeWindow extends javax.swing.JFrame {
                     .addComponent(btnDelete))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(75, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                .addComponent(btnReturn)
+                .addContainerGap())
         );
 
         pack();
@@ -222,13 +236,18 @@ public class ExpenseTypeWindow extends javax.swing.JFrame {
          if(txtSearch.getText().equals("")){
             redo();
         }else{
-            String text = txtSearch.getText();
+        String text = txtSearch.getText();
         List<ExpenseType> users = typedao.search(text);
         DefaultTableModel tm = buildTableModel(users);
         tblType.setModel(tm);
         refreshTable(users);
         }
     }//GEN-LAST:event_txtSearchKeyReleased
+
+    private void btnReturnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReturnActionPerformed
+       this.setVisible(false);
+       new MainWindow().setVisible(true);
+    }//GEN-LAST:event_btnReturnActionPerformed
     
     
     
@@ -281,6 +300,7 @@ public class ExpenseTypeWindow extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnInsert;
+    private javax.swing.JButton btnReturn;
     private javax.swing.JButton btnUpdate;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

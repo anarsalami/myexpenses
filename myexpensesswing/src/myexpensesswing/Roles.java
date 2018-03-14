@@ -206,6 +206,11 @@ public final class Roles extends javax.swing.JFrame {
         refreshTable();
 
     }
+    
+     private void btnReturnActionPerformed(java.awt.event.ActionEvent evt) {                                          
+      this.setVisible(false);
+       new MainWindow().setVisible(true);
+    }                       
 
     /**
      * @param args the command line arguments
@@ -252,5 +257,6 @@ public final class Roles extends javax.swing.JFrame {
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField roleId;
     private javax.swing.JTextField roleName;
+     private javax.swing.JButton btnReturn;
     // End of variables declaration                   
 }

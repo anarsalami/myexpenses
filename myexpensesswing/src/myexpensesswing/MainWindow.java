@@ -27,34 +27,37 @@ public class MainWindow extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        menu = new javax.swing.JMenuBar();
+        btnReturn = new javax.swing.JButton();
+        jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        mnUsers = new javax.swing.JMenu();
+        mnUser = new javax.swing.JMenu();
         mnExpenses = new javax.swing.JMenu();
         mnExpenseType = new javax.swing.JMenu();
-        mnExpenseCategory = new javax.swing.JMenu();
+        mnExpenseCatagory = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jMenu1.setText("File");
-        menu.add(jMenu1);
+        btnReturn.setText("Return");
+        btnReturn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReturnActionPerformed(evt);
+            }
+        });
 
-        mnUsers.setText("Users");
-        mnUsers.addMenuListener(new javax.swing.event.MenuListener() {
-            public void menuSelected(javax.swing.event.MenuEvent evt) {
-                mnUsersMenuSelected(evt);
+        jMenu1.setText("File");
+        jMenuBar1.add(jMenu1);
+
+        mnUser.setText("User");
+        mnUser.addMenuListener(new javax.swing.event.MenuListener() {
+            public void menuCanceled(javax.swing.event.MenuEvent evt) {
             }
             public void menuDeselected(javax.swing.event.MenuEvent evt) {
             }
-            public void menuCanceled(javax.swing.event.MenuEvent evt) {
+            public void menuSelected(javax.swing.event.MenuEvent evt) {
+                mnUserMenuSelected(evt);
             }
         });
-        mnUsers.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnUsersActionPerformed(evt);
-            }
-        });
-        menu.add(mnUsers);
+        jMenuBar1.add(mnUser);
 
         mnExpenses.setText("Expenses");
         mnExpenses.addMenuListener(new javax.swing.event.MenuListener() {
@@ -66,106 +69,121 @@ public class MainWindow extends javax.swing.JFrame {
                 mnExpensesMenuSelected(evt);
             }
         });
-        mnExpenses.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnExpensesActionPerformed(evt);
-            }
-        });
-        menu.add(mnExpenses);
+        jMenuBar1.add(mnExpenses);
 
-        mnExpenseType.setText("Expense Types");
+        mnExpenseType.setText("Expense Type");
         mnExpenseType.addMenuListener(new javax.swing.event.MenuListener() {
+            public void menuCanceled(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuDeselected(javax.swing.event.MenuEvent evt) {
+            }
             public void menuSelected(javax.swing.event.MenuEvent evt) {
                 mnExpenseTypeMenuSelected(evt);
             }
-            public void menuDeselected(javax.swing.event.MenuEvent evt) {
-            }
+        });
+        jMenuBar1.add(mnExpenseType);
+
+        mnExpenseCatagory.setText("Expense Catagory");
+        mnExpenseCatagory.addMenuListener(new javax.swing.event.MenuListener() {
             public void menuCanceled(javax.swing.event.MenuEvent evt) {
             }
-        });
-        mnExpenseType.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnExpenseTypeActionPerformed(evt);
+            public void menuDeselected(javax.swing.event.MenuEvent evt) {
             }
-        });
-        mnExpenseType.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                mnExpenseTypeKeyPressed(evt);
-            }
-        });
-        menu.add(mnExpenseType);
-
-        mnExpenseCategory.setText("Expense Category");
-        mnExpenseCategory.addMenuListener(new javax.swing.event.MenuListener() {
             public void menuSelected(javax.swing.event.MenuEvent evt) {
-                mnExpenseCategoryMenuSelected(evt);
-            }
-            public void menuDeselected(javax.swing.event.MenuEvent evt) {
-            }
-            public void menuCanceled(javax.swing.event.MenuEvent evt) {
+                mnExpenseCatagoryMenuSelected(evt);
             }
         });
-        menu.add(mnExpenseCategory);
+        jMenuBar1.add(mnExpenseCatagory);
 
-        setJMenuBar(menu);
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(533, Short.MAX_VALUE)
+                .addComponent(btnReturn)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 327, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(354, Short.MAX_VALUE)
+                .addComponent(btnReturn)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void mnExpenseTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnExpenseTypeActionPerformed
+    private void mnUserMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_mnUserMenuSelected
+         this.setVisible(false);
+        new UsersWindow().setVisible(true);
+    }//GEN-LAST:event_mnUserMenuSelected
 
-    }//GEN-LAST:event_mnExpenseTypeActionPerformed
-
-    private void mnUsersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnUsersActionPerformed
-
-    }//GEN-LAST:event_mnUsersActionPerformed
+    private void mnExpensesMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_mnExpensesMenuSelected
+        this.setVisible(false);
+        new ExpenseWindow().setVisible(true);
+    }//GEN-LAST:event_mnExpensesMenuSelected
 
     private void mnExpenseTypeMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_mnExpenseTypeMenuSelected
         this.setVisible(false);
         new ExpenseTypeWindow().setVisible(true);
     }//GEN-LAST:event_mnExpenseTypeMenuSelected
 
-    private void mnUsersMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_mnUsersMenuSelected
+    private void mnExpenseCatagoryMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_mnExpenseCatagoryMenuSelected
+         this.setVisible(false);
+         new ExpenseCategoryWindow().setVisible(true);
+    }//GEN-LAST:event_mnExpenseCatagoryMenuSelected
+
+    private void btnReturnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReturnActionPerformed
         this.setVisible(false);
-        new UsersWindow().setVisible(true);
-    }//GEN-LAST:event_mnUsersMenuSelected
+       new LoginWindow().setVisible(true);
+    }//GEN-LAST:event_btnReturnActionPerformed
 
-    private void mnExpenseTypeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_mnExpenseTypeKeyPressed
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
 
-    }//GEN-LAST:event_mnExpenseTypeKeyPressed
-
-    private void mnExpenseCategoryMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_mnExpenseCategoryMenuSelected
-        this.setVisible(false);
-        new ExpenseCategoryWindow().setVisible(true);
-    }//GEN-LAST:event_mnExpenseCategoryMenuSelected
-
-    private void mnExpensesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnExpensesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_mnExpensesActionPerformed
-
-    private void mnExpensesMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_mnExpensesMenuSelected
-        // TODO add your handling code here:
-        this.setVisible(false);
-        new ExpenseWindow().setVisible(true);
-    }//GEN-LAST:event_mnExpensesMenuSelected
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new MainWindow().setVisible(true);
+            }
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnReturn;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenuBar menu;
-    private javax.swing.JMenu mnExpenseCategory;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenu mnExpenseCatagory;
     private javax.swing.JMenu mnExpenseType;
     private javax.swing.JMenu mnExpenses;
-    private javax.swing.JMenu mnUsers;
+    private javax.swing.JMenu mnUser;
     // End of variables declaration//GEN-END:variables
 }

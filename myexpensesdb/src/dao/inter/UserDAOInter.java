@@ -20,4 +20,5 @@ public interface UserDAOInter {
     public abstract int logIn(String username, String password);
     
     public int signUp(User user);
+     public List<User> search(String text);
 }

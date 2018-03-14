@@ -26,7 +26,7 @@ public class UserDAOImpl extends DBUtility implements UserDAOInter {
             stmt.setString(2, user.getSurname());
             stmt.setString(3, user.getUsername());
             stmt.setString(4, user.getPassword());
-            stmt.setInt(5, 2);
+            stmt.setInt(5, user.getRoleId());
 
             int result = stmt.executeUpdate();
             if(result > 0) {
@@ -42,6 +42,46 @@ public class UserDAOImpl extends DBUtility implements UserDAOInter {
         }
         return 0;
     }
+    
+    
+     @Override
+    public List<User> search(String text) {
+         Connection connection = null;
+        List<User> list = new ArrayList<>();
+        try {
+            connection = connect();
+
+            String sql = "select * from user where name like ? OR surname like ? OR username like ?  ";
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setString(1, "%"+text+"%");
+            stmt.setString(2, "%"+text+"%");
+            stmt.setString(3, "%"+text+"%");
+            
+            ResultSet rs = stmt.executeQuery();
+            while(rs.next()){
+                int userId = rs.getInt("id");
+                String Name = rs.getString("name");
+                String surName = rs.getString("surname");
+                String userName = rs.getString("username");
+                String password = rs.getString("password");
+                int roleId = rs.getInt("role_id");
+
+                User type = new User();
+                type.setId(userId);
+                type.setName(Name);
+                type.setSurname(surName);
+                type.setUsername(userName);
+                type.setPassword(password);
+                type.setRoleId(roleId);
+                list.add(type);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            close(connection);
+        }
+        return list;
+       }
 
     @Override
     public User find(int id) {//jdbc specification-nin shertlerini odeyen kitabxana
@@ -129,15 +169,18 @@ public class UserDAOImpl extends DBUtility implements UserDAOInter {
 
     @Override
     public boolean update(int id, User user) {
-        Connection connection = null;
+         Connection connection = null;
         try {
             connection = connect();
 
-            String sql = "update user set name = ?, surname = ? where id = ?";
+            String sql = "update user set name = ?, surname = ?, username =?, password =?, role_id =? where id = ?";
             PreparedStatement stmt = connection.prepareStatement(sql);
             stmt.setString(1, user.getName());
             stmt.setString(2, user.getSurname());
-            stmt.setInt(3, id);
+            stmt.setString(3, user.getUsername());
+            stmt.setString(4, user.getPassword());
+            stmt.setInt(5, user.getRoleId());
+            stmt.setInt(6, id);
 
             stmt.executeUpdate();
             return true;
@@ -166,6 +209,7 @@ public class UserDAOImpl extends DBUtility implements UserDAOInter {
                 String userName = rs.getString("name");
                 String userSurname = rs.getString("surname");
                 String username = rs.getString("username");
+                String password = rs.getString("password");
                 int roleId = rs.getInt("role_id");
 
                 User user = new User();
@@ -173,6 +217,7 @@ public class UserDAOImpl extends DBUtility implements UserDAOInter {
                 user.setName(userName);
                 user.setSurname(userSurname);
                 user.setUsername(username);
+                user.setPassword(password);
                 user.setRoleId(roleId);
 
                 list.add(user);

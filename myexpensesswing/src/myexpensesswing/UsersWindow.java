@@ -24,34 +24,48 @@ public class UsersWindow extends javax.swing.JFrame {
      */
     public UsersWindow() {
         initComponents();
-        refreshTable();
+        redo();
     }
     
-    public void refreshTable(){
-        DefaultTableModel tm = buildTableModel();
+    
+    
+    public void refreshboxes(){
+        txtName.setText("");
+        txtSurname.setText("");
+        txtUsername.setText("");
+        txtPassword.setText("");
+    }
+      private void redo(){
+        List<User> types = userDao.selectAll();
+        refreshTable(types);
+       
+    }
+    private void refreshTable(List<User> types){
+        DefaultTableModel tm = buildTableModel(types);
         tblUser.setModel(tm);
     }
     
-    
-    public DefaultTableModel buildTableModel() {
+    public DefaultTableModel buildTableModel( List<User> list) {
         // names of columns
         Vector<String> columnNames = new Vector<String>();
         columnNames.add("id");
         columnNames.add("name");
         columnNames.add("surname");
         columnNames.add("username");
+        columnNames.add("password");        
         columnNames.add("role");
 
         // data of the table
         Vector<Vector<Object>> setrlerToplusu = new Vector<Vector<Object>>();
            
-        List<User> list = userDao.selectAll();
+
         for(User u: list){
             Vector<Object> setr = new Vector<Object>();
             setr.add(u.getId());
             setr.add(u.getName());
             setr.add(u.getSurname());
             setr.add(u.getUsername());
+            setr.add(u.getPassword());
             setr.add(u.getRoleId()==1?"Admin":"User");
 
             setrlerToplusu.add(setr);
@@ -85,9 +99,10 @@ public class UsersWindow extends javax.swing.JFrame {
         btnDelete = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         cbRoleList = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
+        txtSearch = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblUser = new javax.swing.JTable();
+        btnReturn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -107,6 +122,11 @@ public class UsersWindow extends javax.swing.JFrame {
         });
 
         btnUpdate.setText("Update");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
 
         btnDelete.setText("Delete");
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
@@ -119,10 +139,15 @@ public class UsersWindow extends javax.swing.JFrame {
 
         cbRoleList.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Admin", "User" }));
 
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+        txtSearch.setText("Search");
+        txtSearch.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                txtSearchMouseReleased(evt);
+            }
+        });
+        txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtSearchKeyReleased(evt);
             }
         });
 
@@ -157,7 +182,7 @@ public class UsersWindow extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cbRoleList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(229, 229, 229)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(76, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btnInsert)
@@ -166,8 +191,7 @@ public class UsersWindow extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnDelete)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(119, 119, 119))
+                .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -180,19 +204,22 @@ public class UsersWindow extends javax.swing.JFrame {
                     .addComponent(txtSurname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
                     .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5)
-                    .addComponent(cbRoleList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnInsert)
-                    .addComponent(btnUpdate)
-                    .addComponent(btnDelete)
-                    .addComponent(jButton1))
-                .addContainerGap())
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5)
+                            .addComponent(cbRoleList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnInsert)
+                            .addComponent(btnUpdate)
+                            .addComponent(btnDelete))
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
 
         tblUser.setModel(new javax.swing.table.DefaultTableModel(
@@ -206,27 +233,49 @@ public class UsersWindow extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tblUser.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblUserMouseClicked(evt);
+            }
+        });
+        tblUser.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tblUserKeyPressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblUser);
+
+        btnReturn.setText("Return");
+        btnReturn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReturnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnReturn)))
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 617, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(24, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 211, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnReturn)
+                .addGap(0, 12, Short.MAX_VALUE))
         );
 
         pack();
@@ -241,6 +290,7 @@ public class UsersWindow extends javax.swing.JFrame {
         if(cbRoleList.getSelectedIndex()==0){
             roleId = 1;
         }
+       
         
         User user = new User();
         user.setName(name);
@@ -250,7 +300,8 @@ public class UsersWindow extends javax.swing.JFrame {
         user.setRoleId(roleId);
         
         userDao.insert(user);
-        refreshTable();
+        redo();
+        refreshboxes();
     }//GEN-LAST:event_btnInsertActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
@@ -259,14 +310,81 @@ public class UsersWindow extends javax.swing.JFrame {
          int selectedRow= tblUser.getSelectedRow();
          int id = Integer.valueOf(String.valueOf(tblUser.getModel().getValueAt(selectedRow, 0)));
          userDao.delete(id);
-         refreshTable();
+        redo();
+         refreshboxes();
       }
       
     }//GEN-LAST:event_btnDeleteActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void tblUserKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblUserKeyPressed
+        
+    }//GEN-LAST:event_tblUserKeyPressed
+
+    private void tblUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblUserMouseClicked
+        int selectedRow= tblUser.getSelectedRow();
+        String name =tblUser.getValueAt(selectedRow, 1).toString() ;
+        String surname = tblUser.getValueAt(selectedRow, 2).toString() ;
+        String username = tblUser.getValueAt(selectedRow, 3).toString() ;
+        String password = tblUser.getValueAt(selectedRow, 4).toString() ;
+        String role = tblUser.getValueAt(selectedRow, 5).toString() ;
+        
+        int roleId = 0;
+        if(role.equals("User")){
+            roleId = 1;
+        }
+        txtName.setText(name);
+        txtSurname.setText(surname);
+        txtUsername.setText(username);
+        txtPassword.setText(password);
+        cbRoleList.setSelectedIndex(roleId);
+        
+    }//GEN-LAST:event_tblUserMouseClicked
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        int selectedRow= tblUser.getSelectedRow();
+         int id = Integer.valueOf(String.valueOf(tblUser.getModel().getValueAt(selectedRow, 0))); 
+        String name = txtName.getText();
+        String surname = txtSurname.getText();
+        String username = txtUsername.getText();
+        String password = txtPassword.getText();
+        int roleId = 2;
+        if(cbRoleList.getSelectedIndex()==0){
+            roleId = 1;
+        }
+        
+        User user = new User();
+        user.setName(name);
+        user.setSurname(surname);
+        user.setUsername(username);
+        user.setPassword(password);
+        user.setRoleId(roleId);
+        
+         userDao.update(id, user);
+        redo();
+        refreshboxes();
+    }//GEN-LAST:event_btnUpdateActionPerformed
+
+    private void btnReturnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReturnActionPerformed
+         this.setVisible(false);
+       new MainWindow().setVisible(true);
+    }//GEN-LAST:event_btnReturnActionPerformed
+
+    private void txtSearchMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtSearchMouseReleased
+        txtSearch.setText("");
+    }//GEN-LAST:event_txtSearchMouseReleased
+
+    private void txtSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyReleased
+         if(txtSearch.getText().equals("")){
+            redo();
+            refreshboxes();
+        }else{
+        String text = txtSearch.getText();
+        List<User> users = userDao.search(text);
+        DefaultTableModel tm = buildTableModel(users);
+        tblUser.setModel(tm);
+        refreshTable(users);
+        }
+    }//GEN-LAST:event_txtSearchKeyReleased
 
     /**
      * @param args the command line arguments
@@ -337,9 +455,9 @@ public class UsersWindow extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnInsert;
+    private javax.swing.JButton btnReturn;
     private javax.swing.JButton btnUpdate;
     private javax.swing.JComboBox<String> cbRoleList;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -350,6 +468,7 @@ public class UsersWindow extends javax.swing.JFrame {
     private javax.swing.JTable tblUser;
     private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtPassword;
+    private javax.swing.JTextField txtSearch;
     private javax.swing.JTextField txtSurname;
     private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
