@@ -8,6 +8,9 @@
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
     <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
   </SyntheticProperties>
+  <Events>
+    <EventHandler event="windowOpened" listener="java.awt.event.WindowListener" parameters="java.awt.event.WindowEvent" handler="formWindowOpened"/>
+  </Events>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
@@ -129,29 +132,28 @@
                       </Group>
                   </Group>
                   <Group type="103" groupAlignment="1" attributes="0">
-                      <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Component id="labelSearch" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="textFieldSearch" min="-2" pref="158" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="1" attributes="0">
+                      <Group type="102" attributes="0">
                           <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                           <Component id="labelCost" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="textFieldCost" min="-2" pref="51" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="labelTypeId" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="textFieldTypeId" min="-2" pref="47" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="cmbTypeId" pref="123" max="32767" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="labelCategoryId" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="cmbCategoryId" min="-2" pref="122" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Component id="labelSearch" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="textFieldCategoryId" min="-2" pref="47" max="-2" attributes="0"/>
-                          <EmptySpace min="0" pref="159" max="32767" attributes="0"/>
+                          <Component id="textFieldSearch" min="-2" pref="158" max="-2" attributes="0"/>
                       </Group>
                   </Group>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -167,9 +169,9 @@
                       <Component id="labelCost" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="textFieldCost" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="labelTypeId" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="textFieldTypeId" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="labelCategoryId" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="textFieldCategoryId" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="cmbTypeId" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="cmbCategoryId" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -235,7 +237,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="labelDescription">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Decription"/>
+            <Property name="text" type="java.lang.String" value="Description"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="textFieldDescription">
@@ -249,17 +251,36 @@
         </Component>
         <Component class="javax.swing.JLabel" name="labelTypeId">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Type ID"/>
+            <Property name="text" type="java.lang.String" value="Type "/>
           </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="textFieldTypeId">
         </Component>
         <Component class="javax.swing.JLabel" name="labelCategoryId">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Category ID"/>
+            <Property name="text" type="java.lang.String" value="Category "/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="textFieldCategoryId">
+        <Component class="javax.swing.JComboBox" name="cmbTypeId">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="0"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmbTypeIdActionPerformed"/>
+          </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="cmbCategoryId">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="0"/>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>

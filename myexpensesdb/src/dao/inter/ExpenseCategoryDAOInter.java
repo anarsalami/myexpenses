@@ -16,6 +16,7 @@ public interface ExpenseCategoryDAOInter {
     
     public abstract int insert(ExpenseCategory category);
     
+    public int findIdByName(String name);
     
     public abstract ExpenseCategory find(int id);
 

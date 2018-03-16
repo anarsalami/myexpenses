@@ -5,6 +5,8 @@
  */
 package myexpensesswing;
 
+import beans.User;
+
 /**
  *
  * @author Anar Salami
@@ -16,6 +18,7 @@ public class MainWindow extends javax.swing.JFrame {
      */
     public MainWindow() {
         initComponents();
+        
     }
 
     /**
@@ -28,14 +31,19 @@ public class MainWindow extends javax.swing.JFrame {
     private void initComponents() {
 
         btnReturn = new javax.swing.JButton();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
+        mnMain = new javax.swing.JMenuBar();
         mnUser = new javax.swing.JMenu();
         mnExpenses = new javax.swing.JMenu();
         mnExpenseType = new javax.swing.JMenu();
         mnExpenseCatagory = new javax.swing.JMenu();
+        mnRoles = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         btnReturn.setText("Return");
         btnReturn.addActionListener(new java.awt.event.ActionListener() {
@@ -43,9 +51,6 @@ public class MainWindow extends javax.swing.JFrame {
                 btnReturnActionPerformed(evt);
             }
         });
-
-        jMenu1.setText("File");
-        jMenuBar1.add(jMenu1);
 
         mnUser.setText("User");
         mnUser.addMenuListener(new javax.swing.event.MenuListener() {
@@ -57,7 +62,7 @@ public class MainWindow extends javax.swing.JFrame {
                 mnUserMenuSelected(evt);
             }
         });
-        jMenuBar1.add(mnUser);
+        mnMain.add(mnUser);
 
         mnExpenses.setText("Expenses");
         mnExpenses.addMenuListener(new javax.swing.event.MenuListener() {
@@ -69,7 +74,7 @@ public class MainWindow extends javax.swing.JFrame {
                 mnExpensesMenuSelected(evt);
             }
         });
-        jMenuBar1.add(mnExpenses);
+        mnMain.add(mnExpenses);
 
         mnExpenseType.setText("Expense Type");
         mnExpenseType.addMenuListener(new javax.swing.event.MenuListener() {
@@ -81,7 +86,7 @@ public class MainWindow extends javax.swing.JFrame {
                 mnExpenseTypeMenuSelected(evt);
             }
         });
-        jMenuBar1.add(mnExpenseType);
+        mnMain.add(mnExpenseType);
 
         mnExpenseCatagory.setText("Expense Catagory");
         mnExpenseCatagory.addMenuListener(new javax.swing.event.MenuListener() {
@@ -93,9 +98,26 @@ public class MainWindow extends javax.swing.JFrame {
                 mnExpenseCatagoryMenuSelected(evt);
             }
         });
-        jMenuBar1.add(mnExpenseCatagory);
+        mnMain.add(mnExpenseCatagory);
 
-        setJMenuBar(jMenuBar1);
+        mnRoles.setText("Roles");
+        mnRoles.addMenuListener(new javax.swing.event.MenuListener() {
+            public void menuCanceled(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuDeselected(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuSelected(javax.swing.event.MenuEvent evt) {
+                mnRolesMenuSelected(evt);
+            }
+        });
+        mnRoles.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                mnRolesKeyPressed(evt);
+            }
+        });
+        mnMain.add(mnRoles);
+
+        setJMenuBar(mnMain);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -117,8 +139,17 @@ public class MainWindow extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public  void components(int roleId) {
+        if (roleId == 2) {
+            this.setVisible(true);
+            mnMain.remove(mnExpenseType);
+            mnMain.remove(mnUser);
+            mnMain.remove(mnRoles);
+        }
+    }
+
     private void mnUserMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_mnUserMenuSelected
-         this.setVisible(false);
+        this.setVisible(false);
         new UsersWindow().setVisible(true);
     }//GEN-LAST:event_mnUserMenuSelected
 
@@ -133,14 +164,31 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_mnExpenseTypeMenuSelected
 
     private void mnExpenseCatagoryMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_mnExpenseCatagoryMenuSelected
-         this.setVisible(false);
-         new ExpenseCategoryWindow().setVisible(true);
+        this.setVisible(false);
+        new ExpenseCategoryWindow().setVisible(true);
     }//GEN-LAST:event_mnExpenseCatagoryMenuSelected
 
     private void btnReturnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReturnActionPerformed
         this.setVisible(false);
-       new LoginWindow().setVisible(true);
+        new LoginWindow().setVisible(true);
     }//GEN-LAST:event_btnReturnActionPerformed
+
+    private void mnRolesKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_mnRolesKeyPressed
+
+    }//GEN-LAST:event_mnRolesKeyPressed
+
+    private void mnRolesMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_mnRolesMenuSelected
+        this.setVisible(false);
+        new Roles().setVisible(true);
+    }//GEN-LAST:event_mnRolesMenuSelected
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        User user = new User();
+        if (user.getRoleId() == 1) {
+            mnUser.remove(mnExpenseCatagory);
+            mnUser.remove(mnRoles);
+        }
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments
@@ -168,6 +216,7 @@ public class MainWindow extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -179,11 +228,11 @@ public class MainWindow extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnReturn;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu mnExpenseCatagory;
     private javax.swing.JMenu mnExpenseType;
     private javax.swing.JMenu mnExpenses;
+    private javax.swing.JMenuBar mnMain;
+    private javax.swing.JMenu mnRoles;
     private javax.swing.JMenu mnUser;
     // End of variables declaration//GEN-END:variables
 }

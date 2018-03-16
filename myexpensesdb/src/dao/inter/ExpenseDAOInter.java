@@ -21,6 +21,7 @@ public interface ExpenseDAOInter {
     boolean deleteExpense(int id);
 
     boolean editExpense(int id, Expense expense);
+    
 
     List<Expense> allExpenses();
 }

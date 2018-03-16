@@ -13,6 +13,7 @@ public interface ExpenseTypeDAOInter {
     public abstract int insert(ExpenseType type);
 
     public abstract ExpenseType find(int id);
+    public int findIdByName(String name);
 
     public List<ExpenseType> search(String text);
 

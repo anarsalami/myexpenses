@@ -1,9 +1,15 @@
 package myexpensesswing;
 
 import beans.Expense;
+import beans.ExpenseCategory;
+import beans.ExpenseType;
 import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
+import dao.impl.ExpenseCategoryDAOImpl;
 import dao.impl.ExpenseDAOImpl;
+import dao.impl.ExpenseTypeDAOImpl;
+import dao.inter.ExpenseCategoryDAOInter;
 import dao.inter.ExpenseDAOInter;
+import dao.inter.ExpenseTypeDAOInter;
 import java.util.List;
 import java.util.Vector;
 import javax.swing.JOptionPane;
@@ -13,6 +19,10 @@ import javax.swing.table.DefaultTableModel;
 public class ExpenseWindow extends javax.swing.JFrame {
 
     ExpenseDAOInter expenseDAO = new ExpenseDAOImpl();
+
+    ExpenseTypeDAOInter typeDAO = new ExpenseTypeDAOImpl();
+
+    ExpenseCategoryDAOInter catogoryDAO = new ExpenseCategoryDAOImpl();
 
     public ExpenseWindow() {
         initComponents();
@@ -38,12 +48,17 @@ public class ExpenseWindow extends javax.swing.JFrame {
         labelCost = new javax.swing.JLabel();
         textFieldCost = new javax.swing.JTextField();
         labelTypeId = new javax.swing.JLabel();
-        textFieldTypeId = new javax.swing.JTextField();
         labelCategoryId = new javax.swing.JLabel();
-        textFieldCategoryId = new javax.swing.JTextField();
+        cmbTypeId = new javax.swing.JComboBox<>();
+        cmbCategoryId = new javax.swing.JComboBox<>();
         btnReturn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         tableExpenses.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -85,11 +100,11 @@ public class ExpenseWindow extends javax.swing.JFrame {
         });
 
         textFieldTitle.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
-                textFieldTitleCaretPositionChanged(evt);
-            }
             public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
                 textFieldTitleInputMethodTextChanged(evt);
+            }
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+                textFieldTitleCaretPositionChanged(evt);
             }
         });
         textFieldTitle.addActionListener(new java.awt.event.ActionListener() {
@@ -118,13 +133,19 @@ public class ExpenseWindow extends javax.swing.JFrame {
 
         labelSearch.setText("Search");
 
-        labelDescription.setText("Decription");
+        labelDescription.setText("Description");
 
         labelCost.setText("Cost");
 
-        labelTypeId.setText("Type ID");
+        labelTypeId.setText("Type ");
 
-        labelCategoryId.setText("Category ID");
+        labelCategoryId.setText("Category ");
+
+        cmbTypeId.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbTypeIdActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelTopLayout = new javax.swing.GroupLayout(panelTop);
         panelTop.setLayout(panelTopLayout);
@@ -149,25 +170,24 @@ public class ExpenseWindow extends javax.swing.JFrame {
                         .addComponent(textFieldDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(panelTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(panelTopLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(labelSearch)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(textFieldSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
-                    .addGroup(panelTopLayout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(labelCost)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(textFieldCost, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(labelTypeId)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(textFieldTypeId, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cmbTypeId, 0, 123, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
                         .addComponent(labelCategoryId)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cmbCategoryId, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelTopLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(labelSearch)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(textFieldCategoryId, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 159, Short.MAX_VALUE))))
+                        .addComponent(textFieldSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         panelTopLayout.setVerticalGroup(
             panelTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -181,9 +201,9 @@ public class ExpenseWindow extends javax.swing.JFrame {
                     .addComponent(labelCost)
                     .addComponent(textFieldCost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(labelTypeId)
-                    .addComponent(textFieldTypeId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(labelCategoryId)
-                    .addComponent(textFieldCategoryId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbTypeId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbCategoryId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(panelTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(buttonAdd)
@@ -236,8 +256,8 @@ public class ExpenseWindow extends javax.swing.JFrame {
             String title = textFieldTitle.getText();
             String description = textFieldDescription.getText();
             double cost = Double.valueOf(textFieldCost.getText());
-            int typeId = Integer.valueOf(textFieldTypeId.getText());
-            int categoryId = Integer.valueOf(textFieldCategoryId.getText());
+            int typeId = typeDAO.findIdByName(String.valueOf(cmbTypeId.getSelectedItem()));
+            int categoryId = catogoryDAO.findIdByName(String.valueOf(cmbCategoryId.getSelectedItem()));
 
             if (title.equals(null) || title.equals("")) {
                 throw new Exception("Title is empty");
@@ -286,8 +306,8 @@ public class ExpenseWindow extends javax.swing.JFrame {
         String title = textFieldTitle.getText();
         String description = textFieldDescription.getText();
         double cost = Double.valueOf(textFieldCost.getText());
-        int typeId = Integer.valueOf(textFieldTypeId.getText());
-        int categoryId = Integer.valueOf(textFieldCategoryId.getText());
+        int typeId = typeDAO.findIdByName(String.valueOf(cmbTypeId.getSelectedItem()));
+        int categoryId = catogoryDAO.findIdByName(String.valueOf(cmbCategoryId.getSelectedItem()));
 
         Expense expense = new Expense();
         expense.setTitle(title);
@@ -306,14 +326,15 @@ public class ExpenseWindow extends javax.swing.JFrame {
         String title = tableExpenses.getValueAt(selectedRow, 1).toString();
         String description = tableExpenses.getValueAt(selectedRow, 2).toString();
         String cost = tableExpenses.getValueAt(selectedRow, 3).toString();
-        String typeId = tableExpenses.getValueAt(selectedRow, 4).toString();
-        String categoryId = tableExpenses.getValueAt(selectedRow, 5).toString();
-
+        int typeId = (int) tableExpenses.getValueAt(selectedRow, 4);
+        int categoryId = (int)tableExpenses.getValueAt(selectedRow, 5);
+        ExpenseType type = typeDAO.find(typeId);
         textFieldTitle.setText(title);
+        ExpenseCategory category = catogoryDAO.find(categoryId);
         textFieldDescription.setText(description);
         textFieldCost.setText(cost);
-        textFieldTypeId.setText(typeId);
-        textFieldCategoryId.setText(categoryId);
+        cmbTypeId.setSelectedItem(type.getName());
+        cmbCategoryId.setSelectedItem(category.getName());
     }//GEN-LAST:event_tableExpensesMouseClicked
 
     private void textFieldTitleInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_textFieldTitleInputMethodTextChanged
@@ -349,9 +370,24 @@ public class ExpenseWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_textFieldSearchActionPerformed
 
     private void btnReturnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReturnActionPerformed
-      this.setVisible(false);
-       new MainWindow().setVisible(true);
+        this.setVisible(false);
+        new MainWindow().setVisible(true);
     }//GEN-LAST:event_btnReturnActionPerformed
+
+    private void cmbTypeIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbTypeIdActionPerformed
+
+    }//GEN-LAST:event_cmbTypeIdActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        List<ExpenseType> list = typeDAO.selectAll();
+        for (ExpenseType type : list) {
+            cmbTypeId.addItem(type.getName());
+        }
+        List<ExpenseCategory> category = catogoryDAO.selectAll();
+        for (ExpenseCategory expenseCategory : category) {
+            cmbCategoryId.addItem(expenseCategory.getName());
+        }
+    }//GEN-LAST:event_formWindowOpened
 
     public static void main(String args[]) {
 
@@ -371,8 +407,7 @@ public class ExpenseWindow extends javax.swing.JFrame {
         textFieldTitle.setText("");
         textFieldDescription.setText("");
         textFieldCost.setText("");
-        textFieldTypeId.setText("");
-        textFieldCategoryId.setText("");
+       
         textFieldSearch.setText("");
 
     }
@@ -416,6 +451,8 @@ public class ExpenseWindow extends javax.swing.JFrame {
     private javax.swing.JButton buttonAdd;
     private javax.swing.JButton buttonDelete;
     private javax.swing.JButton buttonEdit;
+    private javax.swing.JComboBox<String> cmbCategoryId;
+    private javax.swing.JComboBox<String> cmbTypeId;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelCategoryId;
@@ -425,11 +462,9 @@ public class ExpenseWindow extends javax.swing.JFrame {
     private javax.swing.JLabel labelTypeId;
     private javax.swing.JPanel panelTop;
     private javax.swing.JTable tableExpenses;
-    private javax.swing.JTextField textFieldCategoryId;
     private javax.swing.JTextField textFieldCost;
     private javax.swing.JTextField textFieldDescription;
     private javax.swing.JTextField textFieldSearch;
     private javax.swing.JTextField textFieldTitle;
-    private javax.swing.JTextField textFieldTypeId;
     // End of variables declaration//GEN-END:variables
 }

@@ -6,6 +6,7 @@ import dbutility.DBUtility;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,7 +30,7 @@ public class ExpenseCategoryDAOImpl extends DBUtility implements ExpenseCategory
         try{
             connection = connect();
             String sql = "insert into expense_category(name) values(?)";
-            PreparedStatement stmt = connection.prepareStatement(sql);
+            PreparedStatement stmt = connection.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
             stmt.setString(1, cat.getName());
 
             int result = stmt.executeUpdate();
@@ -78,6 +79,36 @@ public class ExpenseCategoryDAOImpl extends DBUtility implements ExpenseCategory
         return cat;   
     }
 
+    @Override
+    public int findIdByName(String name) {
+     Connection connection = null;
+        ExpenseCategory type = null;
+        try {
+            connection = connect();//return new MySQLConnectionClass(); JPA
+
+            String sql = "select * from expense_category where name = ?";
+            PreparedStatement stmt = connection.prepareStatement(sql);//return new MySQLPreparedStatementClass()
+            stmt.setString(1, name);
+
+            ResultSet rs = stmt.executeQuery();
+            if(rs.next()){
+                int typeId = rs.getInt("id");
+                String typeName = rs.getString("name");
+                
+
+                type = new ExpenseCategory();
+                type.setId(typeId);
+                type.setName(typeName);
+                
+            }
+            return type.getId();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            close(connection);
+        }
+        return type.getId();    
+    }
     @Override
     public List<ExpenseCategory> search(String text) {
         if(text.trim().equals(""))
