@@ -79,6 +79,36 @@ public class ExpenseTypeDAOImpl extends DBUtility implements ExpenseTypeDAOInter
         }
         return type;    
     }
+    @Override
+    public int findIdByName(String name) {
+     Connection connection = null;
+        ExpenseType type = null;
+        try {
+            connection = connect();//return new MySQLConnectionClass(); JPA
+
+            String sql = "select * from expense_type where name = ?";
+            PreparedStatement stmt = connection.prepareStatement(sql);//return new MySQLPreparedStatementClass()
+            stmt.setString(1, name);
+
+            ResultSet rs = stmt.executeQuery();
+            if(rs.next()){
+                int typeId = rs.getInt("id");
+                String typeName = rs.getString("name");
+                
+
+                type = new ExpenseType();
+                type.setId(typeId);
+                type.setName(typeName);
+                
+            }
+            return type.getId();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            close(connection);
+        }
+        return type.getId();    
+    }
 
     @Override
     public List<ExpenseType> search(String text) {
