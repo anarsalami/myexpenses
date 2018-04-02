@@ -2,8 +2,8 @@ package myexpensesswing;
 
 import beans.Expense;
 import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
-import dao.impl.ExpenseDAOImpl;
-import dao.inter.ExpenseDAOInter;
+import dao.impl.jdbc.ExpenseDAOImpl;
+import dao.inter.jdbc.ExpenseDAOInter;
 import java.util.List;
 import java.util.Vector;
 import javax.swing.JOptionPane;

@@ -6,8 +6,8 @@
 package myexpensesswing;
 
 import beans.User;
-import dao.impl.UserDAOImpl;
-import dao.inter.UserDAOInter;
+import dao.impl.jdbc.UserDAOImpl;
+import dao.inter.jdbc.UserDAOInter;
 import java.util.List;
 import java.util.Vector;
 import javax.swing.JOptionPane;

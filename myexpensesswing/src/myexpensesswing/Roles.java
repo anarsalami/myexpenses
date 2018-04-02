@@ -1,8 +1,8 @@
 package myexpensesswing;
 
 import beans.User;
-import dao.impl.UserRoleDAOImpl;
-import dao.inter.UserRoleDAOInter;
+import dao.impl.jdbc.UserRoleDAOImpl;
+import dao.inter.jdbc.UserRoleDAOInter;
 import java.util.List;
 import java.util.Vector;
 import javax.swing.JOptionPane;

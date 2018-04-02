@@ -6,3 +6,7 @@
 /myexpensesswing/build/
 /myexpensesdb/build/
 /myexpensesdb/dist/
+/myexpensesswing/dist/
+/myexpensesdbOld/dist/
+/myexpensesdbOld/nbproject/private/
+/myexpensesdb/target/
