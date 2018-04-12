@@ -16,10 +16,6 @@ public class UserDAO implements IUserDAO{//extends CrudRepository<User, Long>
     private EntityManager em;
      
 
-    public static EntityManager getEntityManager() {
-        return null;
-    }
-
     @Override
     public int insert(User user) {//Ecemi
         em.persist(user);//insert
