@@ -1,20 +1,19 @@
-package myexpensesswing;
+package com.bsptech.myexpensesswing;
 
 import beans.Expense;
 import beans.ExpenseCategory;
 import beans.ExpenseType;
-import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
-<<<<<<< HEAD
+
+
 import dao.impl.jdbc.ExpenseDAOImpl;
 import dao.inter.jdbc.ExpenseDAOInter;
-=======
-import dao.impl.ExpenseCategoryDAOImpl;
-import dao.impl.ExpenseDAOImpl;
-import dao.impl.ExpenseTypeDAOImpl;
-import dao.inter.ExpenseCategoryDAOInter;
-import dao.inter.ExpenseDAOInter;
-import dao.inter.ExpenseTypeDAOInter;
->>>>>>> 3cebf3289bc62c8748fbf730eaaf9a5c9d5103de
+
+import dao.impl.jdbc.ExpenseCategoryDAOImpl;
+
+import dao.impl.jdbc.ExpenseTypeDAOImpl;
+import dao.inter.jdbc.ExpenseCategoryDAOInter;
+import dao.inter.jdbc.ExpenseTypeDAOInter;
+
 import java.util.List;
 import java.util.Vector;
 import javax.swing.JOptionPane;
@@ -281,9 +280,6 @@ public class ExpenseWindow extends javax.swing.JFrame {
 
         } catch (NumberFormatException e) {
             System.out.println("Incorrect double or integer format in fields.");
-
-        } catch (MySQLIntegrityConstraintViolationException e) {
-            System.out.println("Incorrect selected foreign keys in mysql table fields.");
 
         } catch (Exception e) {
             e.printStackTrace();

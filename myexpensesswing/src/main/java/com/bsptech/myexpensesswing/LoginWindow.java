@@ -3,21 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package myexpensesswing;
+package com.bsptech.myexpensesswing;
 
 import beans.TextFieldHelper;
 import beans.User;
-<<<<<<< HEAD
+
 import dao.impl.jdbc.UserDAOImpl;
 import dao.impl.jdbc.UserRoleDAOImpl;
 import dao.inter.jdbc.UserDAOInter;
-=======
-import dao.impl.UserDAOImpl;
-import dao.impl.UserRoleDAOImpl;
-import dao.inter.UserDAOInter;
+
 import java.awt.MenuItem;
 import javafx.scene.input.Mnemonic;
->>>>>>> 3cebf3289bc62c8748fbf730eaaf9a5c9d5103de
+
 
 /**
  *
@@ -407,6 +404,10 @@ public class LoginWindow extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(LoginWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>

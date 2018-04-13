@@ -1,15 +1,13 @@
 
-package myexpensesswing;
+package com.bsptech.myexpensesswing;
 
-<<<<<<< HEAD
+
 import beans.User;
 import dao.impl.jdbc.UserRoleDAOImpl;
 import dao.inter.jdbc.UserRoleDAOInter;
-=======
+
 import beans.UserRole;
-import dao.impl.UserRoleDAOImpl;
-import dao.inter.UserRoleDAOInter;
->>>>>>> 3cebf3289bc62c8748fbf730eaaf9a5c9d5103de
+
 import java.util.List;
 import java.util.Vector;
 import javax.swing.JOptionPane;
@@ -241,6 +239,7 @@ public class Roles extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Roles.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
