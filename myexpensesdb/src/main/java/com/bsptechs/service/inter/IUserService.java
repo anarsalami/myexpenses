@@ -22,7 +22,7 @@ public interface IUserService {
 
     public User find(int id);
 
-//    public List<User> search(String text);
+    public List<User> search(String text);
 //
 //    public List<User> findAll(String name, String surname);
 //

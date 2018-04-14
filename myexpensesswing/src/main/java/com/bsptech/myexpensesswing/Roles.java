@@ -2,12 +2,14 @@
 package com.bsptech.myexpensesswing;
 
 
-import beans.User;
-import dao.impl.jdbc.UserRoleDAOImpl;
-import dao.inter.jdbc.UserRoleDAOInter;
 
-import beans.UserRole;
 
+
+
+
+import com.bsptechs.entities.UserRole;
+import com.bsptechs.service.impl.UserRoleService;
+import com.bsptechs.service.inter.IUserRoleService;
 import java.util.List;
 import java.util.Vector;
 import javax.swing.JOptionPane;
@@ -16,7 +18,7 @@ import javax.swing.table.DefaultTableModel;
 
 public class Roles extends javax.swing.JFrame {
     
-    UserRoleDAOInter userRoleDao = new UserRoleDAOImpl();
+    IUserRoleService ur = new UserRoleService();
    
     public Roles() {
         initComponents();
@@ -37,7 +39,7 @@ public class Roles extends javax.swing.JFrame {
 
         // data of the table
         Vector<Vector<Object>> setrlerToplusu = new Vector<>();
-        List<UserRole> list = userRoleDao.selectRoles();
+        List<UserRole> list = ur.selectAll();
         list.stream().map((u) -> {
             Vector<Object> setr = new Vector<>();
             setr.add(u.getId());
@@ -177,7 +179,7 @@ public class Roles extends javax.swing.JFrame {
         UserRole userRole = new UserRole();
         userRole.setName(name);
 
-        userRoleDao.insertRole(userRole);
+        ur.insert(userRole);
         refreshTable();
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -186,7 +188,7 @@ public class Roles extends javax.swing.JFrame {
         if (answer == JOptionPane.OK_OPTION) {
             int selectedRow = tblRole.getSelectedRow();
             int id = Integer.valueOf(String.valueOf(tblRole.getModel().getValueAt(selectedRow, 0)));
-            userRoleDao.deleteRole(id);
+            ur.delete(id);
             refreshTable();
         }
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -199,7 +201,7 @@ public class Roles extends javax.swing.JFrame {
         UserRole userRole = new UserRole();
         userRole.setName(name);
         userRole.setId(id);
-        userRoleDao.updateRole(id, userRole);
+        ur.update(userRole);
         refreshTable();
     }//GEN-LAST:event_jButton2ActionPerformed
 

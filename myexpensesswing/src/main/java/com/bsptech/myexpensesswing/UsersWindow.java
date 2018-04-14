@@ -5,9 +5,11 @@
  */
 package com.bsptech.myexpensesswing;
 
-import beans.User;
-import dao.impl.jdbc.UserDAOImpl;
-import dao.inter.jdbc.UserDAOInter;
+
+import com.bsptechs.entities.User;
+import com.bsptechs.entities.UserRole;
+import com.bsptechs.service.impl.UserService;
+import com.bsptechs.service.inter.IUserService;
 import java.util.List;
 import java.util.Vector;
 import javax.swing.JOptionPane;
@@ -18,7 +20,7 @@ import javax.swing.table.DefaultTableModel;
  * @author sarkhanrasullu
  */
 public class UsersWindow extends javax.swing.JFrame {
-    UserDAOInter userDao = new UserDAOImpl();
+    IUserService iu = new UserService();
     /**
      * Creates new form Main
      */
@@ -36,7 +38,7 @@ public class UsersWindow extends javax.swing.JFrame {
         txtPassword.setText("");
     }
       private void redo(){
-        List<User> types = userDao.selectAll();
+        List<User> types = iu.selectAll();
         refreshTable(types);
        
     }
@@ -66,7 +68,7 @@ public class UsersWindow extends javax.swing.JFrame {
             setr.add(u.getSurname());
             setr.add(u.getUsername());
             setr.add(u.getPassword());
-            setr.add(u.getRoleId()==1?"Admin":"User");
+            setr.add(u.getRoleId().getId() == 1 ?"Admin":"User");
 
             setrlerToplusu.add(setr);
         }
@@ -306,9 +308,11 @@ public class UsersWindow extends javax.swing.JFrame {
         user.setSurname(surname);
         user.setPassword(password);
         user.setUsername(username);
-        user.setRoleId(roleId);
+        UserRole role = new UserRole();
+        role.setId(roleId);
+        user.setRoleId(role);
         
-        userDao.insert(user);
+        iu.insert(user);
         redo();
         refreshboxes();
     }//GEN-LAST:event_btnInsertActionPerformed
@@ -318,7 +322,7 @@ public class UsersWindow extends javax.swing.JFrame {
       if(answer == JOptionPane.OK_OPTION){
          int selectedRow= tblUser.getSelectedRow();
          int id = Integer.valueOf(String.valueOf(tblUser.getModel().getValueAt(selectedRow, 0)));
-         userDao.delete(id);
+         iu.delete(id);
         redo();
          refreshboxes();
       }
@@ -366,9 +370,11 @@ public class UsersWindow extends javax.swing.JFrame {
         user.setSurname(surname);
         user.setUsername(username);
         user.setPassword(password);
-        user.setRoleId(roleId);
+        UserRole role = new UserRole();
+        role.setId(roleId);
+        user.setRoleId(role);
         
-         userDao.update(id, user);
+         iu.update(user);
         redo();
         refreshboxes();
     }//GEN-LAST:event_btnUpdateActionPerformed
@@ -388,7 +394,7 @@ public class UsersWindow extends javax.swing.JFrame {
             refreshboxes();
         }else{
         String text = txtSearch.getText();
-        List<User> users = userDao.search(text);
+        List<User> users = iu.search(text);
         DefaultTableModel tm = buildTableModel(users);
         tblUser.setModel(tm);
         refreshTable(users);

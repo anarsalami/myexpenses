@@ -5,8 +5,7 @@
  */
 package com.bsptech.myexpensesswing;
 
-import beans.ExpenseCategory;
-import dao.impl.jdbc.ExpenseCategoryDAOImpl;
+
 import java.awt.Button;
 import java.util.List;
 import java.util.Vector;

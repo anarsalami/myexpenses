@@ -1,19 +1,13 @@
 package com.bsptech.myexpensesswing;
 
-import beans.Expense;
-import beans.ExpenseCategory;
-import beans.ExpenseType;
 
 
-import dao.impl.jdbc.ExpenseDAOImpl;
-import dao.inter.jdbc.ExpenseDAOInter;
-
-import dao.impl.jdbc.ExpenseCategoryDAOImpl;
-
-import dao.impl.jdbc.ExpenseTypeDAOImpl;
-import dao.inter.jdbc.ExpenseCategoryDAOInter;
-import dao.inter.jdbc.ExpenseTypeDAOInter;
-
+import com.bsptechs.service.impl.ExpenseCategoryService;
+import com.bsptechs.service.impl.ExpenseService;
+import com.bsptechs.service.impl.ExpenseTypeService;
+import com.bsptechs.service.inter.IExpenseCategoryService;
+import com.bsptechs.service.inter.IExpenseService;
+import com.bsptechs.service.inter.IExpenseTypeService;
 import java.util.List;
 import java.util.Vector;
 import javax.swing.JOptionPane;
@@ -21,12 +15,12 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class ExpenseWindow extends javax.swing.JFrame {
+    IExpenseService expenseDAO = new ExpenseService();
+    IExpenseTypeService typeDAO = new ExpenseTypeService();
+    IExpenseCategoryService catogoryDAO = new ExpenseCategoryService();
+    
 
-    ExpenseDAOInter expenseDAO = new ExpenseDAOImpl();
-
-    ExpenseTypeDAOInter typeDAO = new ExpenseTypeDAOImpl();
-
-    ExpenseCategoryDAOInter catogoryDAO = new ExpenseCategoryDAOImpl();
+    
 
     public ExpenseWindow() {
         initComponents();

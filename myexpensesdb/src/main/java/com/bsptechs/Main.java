@@ -1,6 +1,14 @@
 package com.bsptechs;
 
+import com.bsptechs.dao.impl.UserRoleDAO;
+import com.bsptechs.dao.inter.IUserRoleDAO;
+import com.bsptechs.entities.User;
+import com.bsptechs.entities.UserRole;
+import com.bsptechs.service.impl.UserRoleService;
 import com.bsptechs.service.impl.UserService;
+import com.bsptechs.service.inter.IUserRoleService;
+import com.bsptechs.service.inter.IUserService;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.Banner;
 import org.springframework.boot.CommandLineRunner;
@@ -18,21 +26,28 @@ public class Main implements CommandLineRunner {
     private UserService userService;
 
     public static void main(String[] args) throws Exception {
-        //disabled banner, don't want to see the spring logo
+//        //disabled banner, don't want to see the spring logo
         SpringApplication app = new SpringApplication(Main.class);
         app.setBannerMode(Banner.Mode.OFF);
         app.run(args);
+
     }
 
-	// Put your logic here.
+    // Put your logic here.
     @Override
-    public void run(String... args){
-        try{
-             System.out.println("users="+userService.selectAll());
-        }catch(Exception ex){
-           ex.printStackTrace();
+    public void run(String... args) {
+        try {
+            IUserRoleDAO us = new UserRoleDAO();
+            int a = us.insert(new UserRole(25,"Adam"));
+            System.out.println(a);
+           
+            
+               
+            
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
-     
+
 //        System.exit(0);
     }
 }
