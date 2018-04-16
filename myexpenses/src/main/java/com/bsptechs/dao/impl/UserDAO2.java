@@ -7,9 +7,11 @@ import com.bsptechs.entities.User;
 import java.util.List;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import org.springframework.context.annotation.Primary;
 
 @Repository
-public class UserDAO implements IUserDAO{//extends CrudRepository<User, Long>
+@Primary
+public class UserDAO2 implements IUserDAO{//extends CrudRepository<User, Long>
 //desktop application, multithread
 
      @PersistenceContext
@@ -50,6 +52,7 @@ public class UserDAO implements IUserDAO{//extends CrudRepository<User, Long>
 //
     @Override
     public List<User> selectAll() {
+        System.out.println("userdao2 selectall");
         Query user = em.createQuery("select u from User u", User.class);//JPA
         List<User> list = user.getResultList();
         return list;

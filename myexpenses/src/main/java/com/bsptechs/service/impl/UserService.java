@@ -5,7 +5,6 @@
  */
 package com.bsptechs.service.impl;
 
-import com.bsptechs.dao.impl.UserDAO;
 import com.bsptechs.dao.inter.IUserDAO;
 import com.bsptechs.entities.User;
 import com.bsptechs.service.inter.IUserService;
@@ -20,15 +19,15 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @Transactional
-public class UserService implements IUserService{
+public class UserService implements IUserService {
 
     @Autowired
-    UserDAO userDao;
-    
+    IUserDAO userDao;
+
     @Override
     public int insert(User user) {
-            return userDao.insert(user);
-    }
+        return userDao.insert(user);
+    }//transaction close
 
     @Override
     public boolean update(User user) {
@@ -54,8 +53,9 @@ public class UserService implements IUserService{
     public int logIn(String username, String password) {
         return userDao.logIn(username, password);
     }
-    public void foo(){
+
+    public void foo() {
         System.out.println("test done");
     }
-    
+
 }

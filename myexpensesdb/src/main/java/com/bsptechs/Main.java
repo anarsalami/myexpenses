@@ -1,6 +1,7 @@
 package com.bsptechs;
 
 import com.bsptechs.service.impl.UserService;
+import com.bsptechs.service.inter.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.Banner;
 import org.springframework.boot.CommandLineRunner;
@@ -15,7 +16,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class Main implements CommandLineRunner {
 
     @Autowired
-    private UserService userService;
+    private IUserService userService;
 
     public static void main(String[] args) throws Exception {
         //disabled banner, don't want to see the spring logo
