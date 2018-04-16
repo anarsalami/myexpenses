@@ -3,21 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package myexpensesswing;
+package com.bsptech.myexpensesswing;
 
-import beans.TextFieldHelper;
-import beans.User;
-<<<<<<< HEAD
-import dao.impl.jdbc.UserDAOImpl;
-import dao.impl.jdbc.UserRoleDAOImpl;
-import dao.inter.jdbc.UserDAOInter;
-=======
-import dao.impl.UserDAOImpl;
-import dao.impl.UserRoleDAOImpl;
-import dao.inter.UserDAOInter;
+
+
+import com.bsptechs.entities.User;
+import com.bsptechs.service.impl.UserService;
+import com.bsptechs.service.inter.IUserService;
 import java.awt.MenuItem;
 import javafx.scene.input.Mnemonic;
->>>>>>> 3cebf3289bc62c8748fbf730eaaf9a5c9d5103de
+
 
 /**
  *
@@ -25,12 +20,13 @@ import javafx.scene.input.Mnemonic;
  */
 public class LoginWindow extends javax.swing.JFrame {
 
-    UserDAOInter userdao = new UserDAOImpl();
-    TextFieldHelper text = new TextFieldHelper();
+    
+    
     public LoginWindow() {
         initComponents();
     }
-
+    IUserService iu = new UserService();
+    
     public void refreshSignUpBoxes(){
         txtNameSign.setText("");
         txtSurnameSign.setText("");
@@ -332,10 +328,9 @@ public class LoginWindow extends javax.swing.JFrame {
         String password = txtPassword.getText();
         
         
-        boolean isUsernameEmpty = text.istextFieldNotEmpty(txtUsername, lblUsername, "Username required");
-        boolean isPasswordEmpty = text.istextFieldNotEmpty(txtPassword, lblPassword, "Password required");
-        if(isUsernameEmpty && isPasswordEmpty){
-            int roleId = userdao.logIn(username, password);
+       
+        if(!username.isEmpty() && !password.isEmpty()){
+            int roleId = iu.logIn(username, password);
              if(roleId==2){
             this.setVisible(false);
            new MainWindow().components(roleId);
@@ -364,15 +359,11 @@ public class LoginWindow extends javax.swing.JFrame {
        String username = txtUsernameSign.getText();
        String password = txtPasswordSign.getText();
        String confirm = txtConPassSignUp.getText();
-       boolean isNameEmpty = text.istextFieldNotEmpty(txtNameSign, lblNameSign, "Name required");
-       boolean isSurnameEmpty = text.istextFieldNotEmpty(txtSurnameSign, lblSurnameSign, "Surname required");
-       boolean isUsernameEmpty = text.istextFieldNotEmpty(txtUsernameSign, lblUsernameSign, "Username required");
-       boolean isPasswordEmpty = text.istextFieldNotEmpty(txtPasswordSign, lblPasswordSign, "Password required");
-       boolean isConfirmEmpty = text.istextFieldNotEmpty(txtConPassSignUp, lblConfirm, "Password confirming required");
+       
       
-       if(isNameEmpty && isSurnameEmpty && isUsernameEmpty &&  isPasswordEmpty && isConfirmEmpty && password.equals(confirm)){
+       if(!name.isEmpty() && !surname.isEmpty() && !username.isEmpty() &&  !password.isEmpty() && !confirm.isEmpty() && password.equals(confirm)){
            User user = new User(name, surname, username, password); 
-           userdao.insert(user);
+           iu.insert(user);
            lblSign.setText("You successfully Sign Up :) You may now Log In");
            refreshSignUpBoxes();
            
@@ -407,6 +398,10 @@ public class LoginWindow extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(LoginWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>

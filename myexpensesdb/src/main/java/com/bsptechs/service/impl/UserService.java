@@ -44,7 +44,11 @@ public class UserService implements IUserService{
     public User find(int id) {
         return userDao.find(id);
     }
-
+    @Override
+    public List<User> search(String text){
+        return userDao.search(text);
+    }
+    
     @Override
     public List<User> selectAll() {
         return userDao.selectAll();

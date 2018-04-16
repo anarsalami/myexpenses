@@ -7,6 +7,11 @@ import com.bsptechs.entities.User;
 import java.util.List;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Restrictions;
+import org.hibernate.loader.custom.sql.SQLCustomQuery;
 
 @Repository
 public class UserDAO implements IUserDAO{//extends CrudRepository<User, Long>
@@ -14,6 +19,8 @@ public class UserDAO implements IUserDAO{//extends CrudRepository<User, Long>
 
      @PersistenceContext
     private EntityManager em;
+     
+     private Criteria cr;
      
 
     @Override
@@ -40,10 +47,13 @@ public class UserDAO implements IUserDAO{//extends CrudRepository<User, Long>
         User user = em.find(User.class, id);
         return user;
     }
-
-    //    public List<User> search(String text) {
-//
-//    }
+    @Override
+        public List<User> search(String text) {
+            cr = (Criteria) em.getCriteriaBuilder();
+            cr.add(Restrictions.like("name", "%text%"));
+            List<User> list = cr.list();            
+            return list;
+    }
 //    public List<User> findAll(String name, String surname) {
 //
 //    }

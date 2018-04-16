@@ -1,20 +1,13 @@
-package myexpensesswing;
+package com.bsptech.myexpensesswing;
 
-import beans.Expense;
-import beans.ExpenseCategory;
-import beans.ExpenseType;
-import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
-<<<<<<< HEAD
-import dao.impl.jdbc.ExpenseDAOImpl;
-import dao.inter.jdbc.ExpenseDAOInter;
-=======
-import dao.impl.ExpenseCategoryDAOImpl;
-import dao.impl.ExpenseDAOImpl;
-import dao.impl.ExpenseTypeDAOImpl;
-import dao.inter.ExpenseCategoryDAOInter;
-import dao.inter.ExpenseDAOInter;
-import dao.inter.ExpenseTypeDAOInter;
->>>>>>> 3cebf3289bc62c8748fbf730eaaf9a5c9d5103de
+
+
+import com.bsptechs.service.impl.ExpenseCategoryService;
+import com.bsptechs.service.impl.ExpenseService;
+import com.bsptechs.service.impl.ExpenseTypeService;
+import com.bsptechs.service.inter.IExpenseCategoryService;
+import com.bsptechs.service.inter.IExpenseService;
+import com.bsptechs.service.inter.IExpenseTypeService;
 import java.util.List;
 import java.util.Vector;
 import javax.swing.JOptionPane;
@@ -22,12 +15,12 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class ExpenseWindow extends javax.swing.JFrame {
+    IExpenseService expenseDAO = new ExpenseService();
+    IExpenseTypeService typeDAO = new ExpenseTypeService();
+    IExpenseCategoryService catogoryDAO = new ExpenseCategoryService();
+    
 
-    ExpenseDAOInter expenseDAO = new ExpenseDAOImpl();
-
-    ExpenseTypeDAOInter typeDAO = new ExpenseTypeDAOImpl();
-
-    ExpenseCategoryDAOInter catogoryDAO = new ExpenseCategoryDAOImpl();
+    
 
     public ExpenseWindow() {
         initComponents();
@@ -281,9 +274,6 @@ public class ExpenseWindow extends javax.swing.JFrame {
 
         } catch (NumberFormatException e) {
             System.out.println("Incorrect double or integer format in fields.");
-
-        } catch (MySQLIntegrityConstraintViolationException e) {
-            System.out.println("Incorrect selected foreign keys in mysql table fields.");
 
         } catch (Exception e) {
             e.printStackTrace();

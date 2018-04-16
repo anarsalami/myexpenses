@@ -3,9 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package myexpensesswing;
+package com.bsptech.myexpensesswing;
 
-import beans.User;
+import com.bsptechs.entities.User;
+import com.bsptechs.service.impl.UserService;
+import com.bsptechs.service.inter.IUserService;
+
+
 
 /**
  *
@@ -138,7 +142,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    IUserService iu = new UserService();
     public  void components(int roleId) {
         if (roleId == 2) {
             this.setVisible(true);
@@ -184,7 +188,7 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         User user = new User();
-        if (user.getRoleId() == 1) {
+        if (user.getRoleId().getId() == 1) {
             mnUser.remove(mnExpenseCatagory);
             mnUser.remove(mnRoles);
         }
@@ -215,6 +219,8 @@ public class MainWindow extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 

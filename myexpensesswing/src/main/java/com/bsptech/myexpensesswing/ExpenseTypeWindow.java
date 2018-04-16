@@ -1,5 +1,5 @@
 
-package myexpensesswing;
+package com.bsptech.myexpensesswing;
 
 import beans.ExpenseType;
 import dao.impl.jdbc.ExpenseTypeDAOImpl;

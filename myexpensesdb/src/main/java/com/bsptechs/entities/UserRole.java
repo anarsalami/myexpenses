@@ -54,6 +54,11 @@ public class UserRole implements Serializable {
         this.id = id;
     }
 
+    public UserRole(String name) {
+
+        this.name = name;
+    }
+
     public UserRole(Integer id, String name) {
         this.id = id;
         this.name = name;
@@ -108,5 +113,5 @@ public class UserRole implements Serializable {
     public String toString() {
         return "entities.UserRole[ id=" + id + " ]";
     }
-    
+
 }
