@@ -5,26 +5,61 @@
  */
 package com.bsptechs.controllers;
 
+import com.bsptechs.beans.UserForm;
 import com.bsptechs.entities.User;
+import com.bsptechs.entities.UserRole;
+import com.bsptechs.service.inter.IUserRoleService;
 import com.bsptechs.service.inter.IUserService;
 import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
+@RequestMapping("users")
 public class UserController {
 
     @Autowired
     IUserService userService;
 
-    @RequestMapping("/alma")
-    public String welcome(Map<String, Object> model) {
-        List<User> alma = userService.selectAll();
-        model.put("users", alma);
-        
-        return "users";
+    @Autowired
+    IUserRoleService userRoleService;
+
+    @RequestMapping(method = RequestMethod.GET)
+    public String userPage(Map<String, Object> model, @ModelAttribute("userForm") UserForm userForm) {
+        List<User> users = userService.selectAll();
+        model.put("users", users);
+        List<UserRole> userRoles = userRoleService.selectAll();
+        model.put("userRoles", userRoles);
+        System.out.println("test2 ");
+        return "usersPage";
+    }
+
+    @RequestMapping(path = "crud", method = RequestMethod.POST)
+    public String userCrud(
+            @ModelAttribute("userForm") UserForm userForm,
+            @RequestParam String action) {
+        User user = new User();
+        user.setName(userForm.getName());
+        user.setSurname(userForm.getSurname());
+        user.setUsername(userForm.getUsername());
+        user.setRoleId(new UserRole(userForm.getRoleId()));
+        user.setPassword(userForm.getPassword());
+        if (action != null) {
+            if (action.equalsIgnoreCase("add")) {
+                userService.insert(user);
+            } else if (action.equalsIgnoreCase("delete")) {
+                userService.delete(userForm.getId());
+            }
+        }
+        System.out.println("id="+userForm.getId());
+        System.out.println("userform="+userForm);
+
+        return "redirect: /myexpenses/users";
     }
 
 }

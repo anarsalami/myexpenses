@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.springframework.stereotype.Repository;
 
-@Repository(value="dao2")
+@Repository(value = "dao2")
 public class CustomerDAO2 implements ICustomerDAO{
  
     @Override
