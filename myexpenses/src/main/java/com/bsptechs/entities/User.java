@@ -7,6 +7,7 @@ package com.bsptechs.entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,14 +15,16 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -39,7 +42,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "User.findByPassword", query = "SELECT u FROM User u WHERE u.password = :password")
     , @NamedQuery(name = "User.findByLastLoginDate", query = "SELECT u FROM User u WHERE u.lastLoginDate = :lastLoginDate")
     , @NamedQuery(name = "User.findByRegDate", query = "SELECT u FROM User u WHERE u.regDate = :regDate")
-    , @NamedQuery(name = "User.findByUnregDate", query = "SELECT u FROM User u WHERE u.unregDate = :unregDate")})
+    , @NamedQuery(name = "User.findByUnregDate", query = "SELECT u FROM User u WHERE u.unregDate = :unregDate")
+    , @NamedQuery(name = "User.findByEnabled", query = "SELECT u FROM User u WHERE u.enabled = :enabled")})
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -49,15 +53,23 @@ public class User implements Serializable {
     @Column(name = "id")
     private Integer id;
     @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 15)
     @Column(name = "name")
     private String name;
     @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 15)
     @Column(name = "surname")
     private String surname;
     @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 15)
     @Column(name = "username")
     private String username;
     @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 15)
     @Column(name = "password")
     private String password;
     @Column(name = "last_login_date")
@@ -69,9 +81,12 @@ public class User implements Serializable {
     @Column(name = "unreg_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date unregDate;
-    @JoinColumn(name = "role_id", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private UserRole roleId;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "enabled")
+    private boolean enabled;
+    @OneToMany(mappedBy = "userId", fetch = FetchType.LAZY)
+    private List<UserRole> userRoleList;
 
     public User() {
     }
@@ -80,12 +95,13 @@ public class User implements Serializable {
         this.id = id;
     }
 
-    public User(Integer id, String name, String surname, String username, String password) {
+    public User(Integer id, String name, String surname, String username, String password, boolean enabled) {
         this.id = id;
         this.name = name;
         this.surname = surname;
         this.username = username;
         this.password = password;
+        this.enabled = enabled;
     }
 
     public Integer getId() {
@@ -152,12 +168,21 @@ public class User implements Serializable {
         this.unregDate = unregDate;
     }
 
-    public UserRole getRoleId() {
-        return roleId;
+    public boolean getEnabled() {
+        return enabled;
     }
 
-    public void setRoleId(UserRole roleId) {
-        this.roleId = roleId;
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    @XmlTransient
+    public List<UserRole> getUserRoleList() {
+        return userRoleList;
+    }
+
+    public void setUserRoleList(List<UserRole> userRoleList) {
+        this.userRoleList = userRoleList;
     }
 
     @Override
@@ -182,10 +207,7 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        return "User{" + "id=" + id + ", name=" + name + ", surname=" + surname + ", username=" + username + ", password=" + password + ", lastLoginDate=" + lastLoginDate + ", regDate=" + regDate + ", unregDate=" + unregDate +'}';
+        return "com.bsptechs.entities.User[ id=" + id + " ]";
     }
-
-   
-    
     
 }

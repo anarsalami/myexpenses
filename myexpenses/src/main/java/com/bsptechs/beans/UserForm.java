@@ -13,7 +13,7 @@ import lombok.Data;
  */
 @Data
 public class UserForm {
-    private int id;
+    private Integer id;
     private String name;
     private String surname;
     private String username;

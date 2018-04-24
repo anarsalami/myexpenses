@@ -5,17 +5,16 @@
  */
 package com.bsptechs.service.inter;
 
-import com.bsptechs.entities.User;
-import com.bsptechs.entities.UserRole;
+import com.bsptechs.entities.Role;
 import java.util.List;
 
 /**
  *
  * @author sarkhanrasullu
  */
-public interface IUserRoleService {
+public interface IRoleService {
     
     
-    public List<UserRole> selectAll();
+    public List<Role> selectAll();
 
 }

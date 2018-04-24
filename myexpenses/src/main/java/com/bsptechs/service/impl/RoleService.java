@@ -5,13 +5,13 @@
  */
 package com.bsptechs.service.impl;
 
-import com.bsptechs.dao.inter.IUserRoleDAO;
-import com.bsptechs.entities.UserRole;
-import com.bsptechs.service.inter.IUserRoleService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import com.bsptechs.dao.inter.IRoleDAO;
+import com.bsptechs.entities.Role;
+import com.bsptechs.service.inter.IRoleService;
 
 /**
  *
@@ -19,13 +19,13 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @Transactional
-public class UserRoleService implements IUserRoleService {
+public class RoleService implements IRoleService {
 
     @Autowired
-    IUserRoleDAO userRoleDao;
+    IRoleDAO userRoleDao;
 
     @Override
-    public List<UserRole> selectAll() {
+    public List<Role> selectAll() {
         return userRoleDao.selectAll();
     }
 

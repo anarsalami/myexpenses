@@ -7,8 +7,7 @@ package com.bsptechs.controllers;
 
 import com.bsptechs.beans.UserForm;
 import com.bsptechs.entities.User;
-import com.bsptechs.entities.UserRole;
-import com.bsptechs.service.inter.IUserRoleService;
+import com.bsptechs.entities.Role;
 import com.bsptechs.service.inter.IUserService;
 import java.util.List;
 import java.util.Map;
@@ -18,6 +17,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import com.bsptechs.service.inter.IRoleService;
 
 @Controller
 @RequestMapping("users")
@@ -27,13 +27,13 @@ public class UserController {
     IUserService userService;
 
     @Autowired
-    IUserRoleService userRoleService;
+    IRoleService userRoleService;
 
     @RequestMapping(method = RequestMethod.GET)
     public String userPage(Map<String, Object> model, @ModelAttribute("userForm") UserForm userForm) {
         List<User> users = userService.selectAll();
         model.put("users", users);
-        List<UserRole> userRoles = userRoleService.selectAll();
+        List<Role> userRoles = userRoleService.selectAll();
         model.put("userRoles", userRoles);
         System.out.println("test2 ");
         return "usersPage";
@@ -47,13 +47,15 @@ public class UserController {
         user.setName(userForm.getName());
         user.setSurname(userForm.getSurname());
         user.setUsername(userForm.getUsername());
-        user.setRoleId(new UserRole(userForm.getRoleId()));
         user.setPassword(userForm.getPassword());
         if (action != null) {
             if (action.equalsIgnoreCase("add")) {
                 userService.insert(user);
             } else if (action.equalsIgnoreCase("delete")) {
                 userService.delete(userForm.getId());
+            } else if (action.equalsIgnoreCase("update")){
+                user.setId(userForm.getId());
+                userService.update(user);
             }
         }
         System.out.println("id="+userForm.getId());
