@@ -8,6 +8,7 @@ package com.bsptechs.entities;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -25,7 +26,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author sarkhanrasullu
+ * @author Anar Salami
  */
 @Entity
 @Table(name = "role")
@@ -47,8 +48,10 @@ public class Role implements Serializable {
     @Size(min = 1, max = 10)
     @Column(name = "name")
     private String name;
-    @OneToMany(mappedBy = "roleId", fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "roleId", fetch = FetchType.LAZY)
     private List<UserRole> userRoleList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "roleId", fetch = FetchType.LAZY)
+    private List<User> userList;
 
     public Role() {
     }
@@ -85,6 +88,15 @@ public class Role implements Serializable {
 
     public void setUserRoleList(List<UserRole> userRoleList) {
         this.userRoleList = userRoleList;
+    }
+
+    @XmlTransient
+    public List<User> getUserList() {
+        return userList;
+    }
+
+    public void setUserList(List<User> userList) {
+        this.userList = userList;
     }
 
     @Override
