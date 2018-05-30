@@ -1,0 +1,23 @@
+.myBtn{
+    background-color: #ff7600;
+    color: white;
+    padding: 6px;
+    width: 60px;
+    border: 0px;
+}
+
+.roundable{
+    border-radius: 10px;
+    border-width: 1px;
+}
+
+.myLink{
+    color: #afa6a6;
+    text-decoration: none;
+}
+
+#logo{
+    height: 74px;
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+}
