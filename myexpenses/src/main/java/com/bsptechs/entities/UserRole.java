@@ -22,7 +22,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author sarkhanrasullu
+ * @author Anar Salami
  */
 @Entity
 @Table(name = "user_role")
@@ -39,10 +39,10 @@ public class UserRole implements Serializable {
     @Column(name = "id")
     private Integer id;
     @JoinColumn(name = "role_id", referencedColumnName = "id")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Role roleId;
     @JoinColumn(name = "user_id", referencedColumnName = "id")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private User userId;
 
     public UserRole() {
