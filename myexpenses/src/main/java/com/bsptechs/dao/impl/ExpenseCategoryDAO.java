@@ -7,7 +7,6 @@ package com.bsptechs.dao.impl;
 
 import com.bsptechs.dao.inter.IExpenseCategoryDAO;
 import com.bsptechs.entities.ExpenseCategory;
-import com.bsptechs.entities.User;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -52,13 +51,13 @@ public class ExpenseCategoryDAO implements IExpenseCategoryDAO{
         ExpenseCategory category = em.find(ExpenseCategory.class, id);
         return category;
     }
-    @Override
-        public List<ExpenseCategory> search(String text) {
-            Criterion category = Restrictions.ilike("name", "%text%");
-            cr.add(category);
-            List<ExpenseCategory> list = cr.list();
-            return list;
-    }
+//    @Override
+//        public List<ExpenseCategory> search(String text) {
+//            Criterion category = Restrictions.ilike("name", "%text%");
+//            cr.add(category);
+//            List<ExpenseCategory> list = cr.list();
+//            return list;
+//    }
 //    public List<User> findAll(String name, String surname) {
 //
 //    }

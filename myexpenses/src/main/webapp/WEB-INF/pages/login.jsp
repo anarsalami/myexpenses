@@ -15,25 +15,24 @@
 
         <div class="wrapper fadeInDown">
             <div id="formContent">
-                <!-- Tabs Titles -->
+                
 
 
                 <h2 ><a href="login.jsp" >Log in</a> </h2>
                 <h2 ><a href="sign.jsp" >Sign up</a></h2>
 
-                <!-- Icon -->
+            
                 <div class="fadeIn first">
                     <img src="assets/images/background/logo.png" id="icon" alt="User Icon" />
                 </div>
 
-                <!-- Login Form -->
-                <form>
+                <form:form action='<spring:url value="/loginAction"/>' method="post">
                     <input type="text" id="username" class="fadeIn second" name="username" placeholder="Username">
                     <input type="text" id="password" class="fadeIn third" name="password" placeholder="Password">
                     <input type="submit" class="fadeIn fourth" value="Log In">
-                </form>
+                </form:form>
 
-                <!-- Remind Passowrd -->
+             
                 <div id="formFooter">
                     <a class="underlineHover" href="#">Forgot Password?</a>
                 </div>

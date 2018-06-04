@@ -23,7 +23,7 @@ public interface IExpenseCategoryDAO {
 
     public ExpenseCategory find(int id);
 
-    public List<ExpenseCategory> search(String text);
+//    public List<ExpenseCategory> search(String text);
 //
 //    public List<User> findAll(String name, String surname);
 //

@@ -5,9 +5,12 @@
  */
 package com.bsptechs.entities;
 
+import com.bsptechs.entities.Authorities;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -84,6 +87,12 @@ public class User implements Serializable {
     @JoinColumn(name = "role_id", referencedColumnName = "id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Role roleId;
+
+     @Column(name = "ENABLED", nullable = false)
+  private boolean enabled;
+
+  @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+  private Set<Authorities> authorities = new HashSet<>();
 
     public User() {
     }
@@ -179,6 +188,25 @@ public class User implements Serializable {
         this.roleId = roleId;
     }
 
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    public Set<Authorities> getAuthorities() {
+        return authorities;
+    }
+
+    public void setAuthorities(Set<Authorities> authorities) {
+        this.authorities = authorities;
+    }
+
+    
+    
+    
     @Override
     public int hashCode() {
         int hash = 0;

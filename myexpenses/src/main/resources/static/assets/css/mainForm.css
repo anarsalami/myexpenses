@@ -238,7 +238,7 @@ iframe {
 /*------------------------------------------------------------------
 [ Input ]*/
 
-.wrap-input100 {
+.wrap-form-control {
     width: 100%;
     position: relative;
     border-bottom: 2px solid #d9d9d9;
@@ -247,11 +247,11 @@ iframe {
    
 }
 
-.rs1-wrap-input100 {
+.rs1-wrap-form-control {
     width: calc((100% - 30px) / 2);
 }
 
-.label-input100 {
+.label-form-control {
     font-family: Poppins-Regular;
     font-size: 15px;
     color: #999999;
@@ -259,7 +259,7 @@ iframe {
     padding-left: 5px;
 }
 
-.input100 {
+.form-control {
     display: block;
     width: 100%;
     background: transparent;
@@ -270,7 +270,7 @@ iframe {
     padding: 0 5px;
 }
 
-.focus-input100 {
+.focus-form-control {
     position: absolute;
     display: block;
     width: 100%;
@@ -280,7 +280,7 @@ iframe {
     pointer-events: none;
 }
 
-.focus-input100::before {
+.focus-form-control::before {
     content: "";
     display: block;
     position: absolute;
@@ -299,23 +299,23 @@ iframe {
 
 
 /*---------------------------------------------*/
-input.input100 {
+input.form-control {
     height: 40px;
 }
 
 
-textarea.input100 {
+textarea.form-control {
     min-height: 110px;
     padding-top: 9px;
     padding-bottom: 13px;
 }
 
 
-.input100:focus + .focus-input100::before {
+.form-control:focus + .focus-form-control::before {
     width: 100%;
 }
 
-.has-val.input100 + .focus-input100::before {
+.has-val.form-control + .focus-form-control::before {
     width: 100%;
 }
 

@@ -13,6 +13,7 @@ import java.util.List;
  *
  * @author Anar Salami
  */
+
 public interface IExpenseCategoryService {
 
     public int insert(ExpenseCategory category);
@@ -23,7 +24,7 @@ public interface IExpenseCategoryService {
 
     public ExpenseCategory find(int id);
 
-    public List<ExpenseCategory> search(String text);
+//    public List<ExpenseCategory> search(String text);
 //
 //    public List<User> findAll(String name, String surname);
 //

@@ -6,9 +6,9 @@
 package com.bsptechs.controllers;
 
 import com.bsptechs.beans.ExpenseCategoryForm;
-import com.bsptechs.beans.RoleForm;
+
 import com.bsptechs.entities.ExpenseCategory;
-import com.bsptechs.entities.Role;
+
 import com.bsptechs.service.inter.IExpenseCategoryService;
 import java.util.List;
 import java.util.Map;
@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import com.bsptechs.service.inter.IRoleService;
+
 
 @Controller
 @RequestMapping("categories")
@@ -30,7 +30,7 @@ public class CategoryController {
  
 
     @RequestMapping(method = RequestMethod.GET)
-    public String categoryPage(Map<String, Object> model, @ModelAttribute("categoriesFormForm") ExpenseCategoryForm categoryForm) {
+    public String categoryPage(Map<String, Object> model, @ModelAttribute("categoryForm") ExpenseCategoryForm categoryForm) {
         List<ExpenseCategory> category = categoryService.selectAll();
         model.put("category", category);
         

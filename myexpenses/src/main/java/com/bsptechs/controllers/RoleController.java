@@ -27,7 +27,7 @@ public class RoleController {
  
 
     @RequestMapping(method = RequestMethod.GET)
-    public String rolePage(Map<String, Object> model, @ModelAttribute("rolesForm") RoleForm roleForm) {
+    public String rolePage(Map<String, Object> model, @ModelAttribute("roleForm") RoleForm roleForm) {
         List<Role> roles = roleService.selectAll();
         model.put("roles", roles);
         
@@ -37,7 +37,7 @@ public class RoleController {
 
     @RequestMapping(path = "crud", method = RequestMethod.POST)
     public String roleCrud(
-            @ModelAttribute("rolesForm") RoleForm roleForm,
+            @ModelAttribute("roleForm") RoleForm roleForm,
             @RequestParam String action) {
        Role role = new Role();
         role.setId(roleForm.getId());

@@ -21,9 +21,9 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @Transactional
-public class ExpenseCategoryService implements IExpenseCategoryService {
-    
-    @Autowired
+
+public class ExpenseCategoryService implements IExpenseCategoryService{
+     @Autowired
     ExpenseCategoryDAO categoryDao;
     
     @Override
@@ -45,10 +45,10 @@ public class ExpenseCategoryService implements IExpenseCategoryService {
     public ExpenseCategory find(int id) {
         return categoryDao.find(id);
     }
-    @Override
-    public List<ExpenseCategory> search(String text){
-        return categoryDao.search(text);
-    }
+//    @Override
+//    public List<ExpenseCategory> search(String text){
+//        return categoryDao.search(text);
+//    }
     
     @Override
     public List<ExpenseCategory> selectAll() {

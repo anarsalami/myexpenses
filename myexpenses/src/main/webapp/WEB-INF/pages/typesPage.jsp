@@ -43,62 +43,62 @@
 
                         <div class="wrap-table100">
                             <form:form    modelAttribute="typeForm" 
-                                          action="type/crud" 
+                                          action="types/crud" 
                                           method="POST"
                                           cssClass="contact100-form"
                                           >
-                                <form class="contact100-form validate-form">
-                                    <div class="wrap-input100 rs1-wrap-input100 validate-input" >
-                                        <form:input path="name" class="form-control" class="input100"  placeholder="Enter role name">
-                                            <span class="focus-input100"></span>
-                                        </div>
 
-                                        <div class="container-contact100-form-btn">
-                                            <button class="contact100-form-btn" name="action" value="add">
-                                                <input type="hidden" name="id" id="idElement"/>
-                                                <span>
-                                                    Add
-                                                    <i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
-                                                </span>
-                                            </button>
-                                            <button class="contact100-form-btn" name="action" value="delete">
-                                                <input type="hidden" name="id" id="idElement"/>
-                                                <span>
-                                                    Delete
-                                                    <i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
-                                                </span>
-                                            </button>
-                                            <button class="contact100-form-btn" name="action" value="update">
-                                                <input type="hidden" name="id" id="idElement"/>
-                                                <span>
-                                                    Update
-                                                    <i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
-                                                </span>
-                                            </button>
-                                        </div>
-                                </form:form>
-
-
-
-                                <div class="table100 ver1 m-b-110">
-                                    <table data-vertable="ver3">
-                                        <thead>
-                                            <tr class="row100 head">
-                                                <th class="column100" data-column="column1">ID</th>
-                                                <th class="column100" data-column="column2"> Role Name</th>
-
-                                            </tr>
-                                        </thead>
-                                        <tbody> <c:forEach var="expenseType" items="${types}">
-                                                <tr class="row100" onclick="setId(<c:out value="${expenseType.id}"/>)">
-                                                    <td class="column100 " data-column="column1"><c:out value="${expenseType.id}"/></td>
-                                                    <td class="column100" data-column="column2"><c:out value="${expenseType.name}"/></td>
-                                                </tr>
-                                            </c:forEach>
-
-                                        </tbody>
-                                    </table>
+                                <div class="wrap-form-control rs1-wrap-form-control" >
+                                    <form:input path="name" class="form-control"  placeholder="Enter role name"/>
+                                    <span class="focus-form-control"></span>
                                 </div>
+
+                                <div class="container-contact100-form-btn">
+                                    <button class="contact100-form-btn" name="action" value="add">
+                                        <input type="hidden" name="id" id="idElement"/>
+                                        <span>
+                                            Add
+                                            <i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
+                                        </span>
+                                    </button>
+                                    <button class="contact100-form-btn" name="action" value="delete">
+                                        <input type="hidden" name="id" id="idElement"/>
+                                        <span>
+                                            Delete
+                                            <i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
+                                        </span>
+                                    </button>
+                                    <button class="contact100-form-btn" name="action" value="update">
+                                        <input type="hidden" name="id" id="idElement"/>
+                                        <span>
+                                            Update
+                                            <i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
+                                        </span>
+                                    </button>
+                                </div>
+                            </form:form>
+
+
+
+                            <div class="table100 ver1 m-b-110">
+                                <table data-vertable="ver3">
+                                    <thead>
+                                        <tr class="row100 head">
+                                            <th class="column100" data-column="column1">ID</th>
+                                            <th class="column100" data-column="column2"> Role Name</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody> <c:forEach var="type" items="${types}">
+                                            <tr class="row100" onclick="setId(<c:out value="${type.id}"/>)">
+                                                <td class="column100 " data-column="column1"><c:out value="${type.id}"/></td>
+                                                <td class="column100" data-column="column2"><c:out value="${type.name}"/></td>
+                                            </tr>
+                                        </c:forEach>
+
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
 
                     </div> 
@@ -118,11 +118,11 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
     <script type="text/javascript">
-                                                    $(document).ready(function () {
-                                                        $('#sidebarCollapse').on('click', function () {
-                                                            $('#sidebar').toggleClass('active');
-                                                        });
+                                                $(document).ready(function () {
+                                                    $('#sidebarCollapse').on('click', function () {
+                                                        $('#sidebar').toggleClass('active');
                                                     });
+                                                });
     </script>
     <script>
         function setId(id) {
