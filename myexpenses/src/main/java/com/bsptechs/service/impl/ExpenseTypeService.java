@@ -12,11 +12,12 @@ import com.bsptechs.entities.User;
 import com.bsptechs.service.inter.IExpenseTypeService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.stereotype.Service;
 /**
  *
  * @author Anar Salami
  */
+@Service
 public class ExpenseTypeService implements IExpenseTypeService{
    @Autowired
     ExpenseTypeDAO typeDAO;

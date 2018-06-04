@@ -5,7 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html>
 <html>
@@ -27,7 +27,6 @@
 
         <div class="wrapper">
             <!-- Sidebar Holder -->
-            <%@include file="header.jsp" %>
 
             <!-- Page Content Holder -->
             <div id="content">
@@ -58,11 +57,11 @@
                                     <span class="focus-input100"></span>
                                 </div>
                                 <div class="wrap-input100 rs1-wrap-input100 validate-input" >
-                                    <form:input path="username" class="form-control" class="input100" placeholder="Enter user username">
+                                    <form:input path="username" class="form-control" class="input100" placeholder="Enter user username"/>
                                         <span class="focus-input100"></span>
                                     </div>
                                     <div class="wrap-input100 rs1-wrap-input100 validate-input" >
-                                        <form:input path="password" class="form-control" type="password" class="input100" placeholder="Enter user password">
+                                        <form:input path="password" class="form-control" type="password" class="input100" placeholder="Enter user password"/>
                                             <span class="focus-input100"></span>
                                         </div>
                                         <div class="col-md-4 validate-input">

@@ -6,19 +6,22 @@
 package com.bsptechs.service.impl;
 
 import com.bsptechs.dao.impl.ExpenseDAO;
-import com.bsptechs.dao.impl.UserDAO;
 import com.bsptechs.entities.Expense;
-import com.bsptechs.entities.User;
 import com.bsptechs.service.inter.IExpenseService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author Anar Salami
  */
+@Service
+@Transactional
 public class ExpenseService implements IExpenseService{
-     @Autowired
+    
+    @Autowired
     ExpenseDAO expenseDAO;
     
     @Override

@@ -35,7 +35,8 @@ public class UserController {
         model.put("users", users);
         List<Role> userRoles = userRoleService.selectAll();
         model.put("userRoles", userRoles);
-        System.out.println("test2 ");
+        System.out.println("userroles size="+userRoles.size());
+        System.out.println("users size= "+users.size());
         return "usersPage";
     }
 

@@ -15,11 +15,13 @@ import javax.persistence.Query;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author Anar Salami
  */
+@Repository
 public class ExpenseTypeDAO implements IExpenseTypeDAO{
         @PersistenceContext
     private EntityManager em;

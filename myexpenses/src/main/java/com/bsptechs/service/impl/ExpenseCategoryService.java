@@ -12,13 +12,18 @@ import com.bsptechs.entities.User;
 import com.bsptechs.service.inter.IExpenseCategoryService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author Anar Salami
  */
-public class ExpenseCategoryService implements IExpenseCategoryService{
-     @Autowired
+@Service
+@Transactional
+public class ExpenseCategoryService implements IExpenseCategoryService {
+    
+    @Autowired
     ExpenseCategoryDAO categoryDao;
     
     @Override
