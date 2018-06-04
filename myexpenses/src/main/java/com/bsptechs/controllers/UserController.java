@@ -5,9 +5,11 @@
  */
 package com.bsptechs.controllers;
 
+import com.bsptechs.beans.RoleForm;
 import com.bsptechs.beans.UserForm;
 import com.bsptechs.entities.User;
 import com.bsptechs.entities.Role;
+import com.bsptechs.entities.UserRole;
 import com.bsptechs.service.inter.IUserService;
 import java.util.List;
 import java.util.Map;
@@ -48,6 +50,7 @@ public class UserController {
         user.setSurname(userForm.getSurname());
         user.setUsername(userForm.getUsername());
         user.setPassword(userForm.getPassword());
+        user.setRoleId(new UserRole().getRoleId());
         if (action != null) {
             if (action.equalsIgnoreCase("add")) {
                 userService.insert(user);

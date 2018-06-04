@@ -12,11 +12,16 @@ import com.bsptechs.entities.User;
 import com.bsptechs.service.inter.IExpenseCategoryService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author Anar Salami
  */
+@Service
+@Transactional
+
 public class ExpenseCategoryService implements IExpenseCategoryService{
      @Autowired
     ExpenseCategoryDAO categoryDao;
@@ -40,10 +45,10 @@ public class ExpenseCategoryService implements IExpenseCategoryService{
     public ExpenseCategory find(int id) {
         return categoryDao.find(id);
     }
-    @Override
-    public List<ExpenseCategory> search(String text){
-        return categoryDao.search(text);
-    }
+//    @Override
+//    public List<ExpenseCategory> search(String text){
+//        return categoryDao.search(text);
+//    }
     
     @Override
     public List<ExpenseCategory> selectAll() {

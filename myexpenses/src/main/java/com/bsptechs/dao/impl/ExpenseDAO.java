@@ -7,7 +7,6 @@ package com.bsptechs.dao.impl;
 
 import com.bsptechs.dao.inter.IExpenseDAO;
 import com.bsptechs.entities.Expense;
-import com.bsptechs.entities.User;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -15,11 +14,12 @@ import javax.persistence.Query;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
-
+import org.springframework.stereotype.Repository;
 /**
  *
  * @author Anar Salami
  */
+@Repository
 public class ExpenseDAO implements IExpenseDAO{
         @PersistenceContext
     private EntityManager em;

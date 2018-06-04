@@ -5,7 +5,6 @@
 
     <groupId>com.bsptechs</groupId>
     <artifactId>myexpenses</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
     <packaging>war</packaging>
 
     <name>myexpenses</name>

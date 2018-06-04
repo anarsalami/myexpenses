@@ -25,10 +25,10 @@
 
 
         <div class="wrapper">
-            <!-- Sidebar Holder -->
+             Sidebar Holder 
             <%@include file="header.jsp" %>
 
-            <!-- Page Content Holder -->
+             Page Content Holder 
             <div id="content">
 
                 <nav class="navbar navbar-default">
@@ -43,14 +43,14 @@
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
                         <div class="wrap-table100">
-                            <form:form   modelAttribute="userForm" 
-                                         action="users/crud" 
+                            <form:form   modelAttribute="categoryForm" 
+                                         action="categories/crud" 
                                          method="POST"
                                          cssClass="contact100-form"                                        
                                          >
 
                                 <div class="wrap-input100 rs1-wrap-input100 validate-input" >
-                                    <form:input path="name" class="form-control" class="input100"  placeholder="Enter category name"/>
+                                    <form:input path="name" class="form-control"  placeholder="Enter category name"/>
                                     <span class="focus-input100"></span>
                                 </div>
 
@@ -117,7 +117,7 @@
 
     <script src="assets/js/main.js"></script>
     <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
-    <!-- Bootstrap Js CDN -->
+     Bootstrap Js CDN 
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
     <script type="text/javascript">

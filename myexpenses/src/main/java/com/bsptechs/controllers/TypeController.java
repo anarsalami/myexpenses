@@ -27,7 +27,7 @@ public class TypeController {
  
 
     @RequestMapping(method = RequestMethod.GET)
-    public String typesPage(Map<String, Object> model, @ModelAttribute("typesForm") ExpenseTypeForm typeForm) {
+    public String typePage(Map<String, Object> model, @ModelAttribute("typeForm") ExpenseTypeForm typeForm) {
         List<ExpenseType> types = typeServices.selectAll();
         model.put("types", types);
         
@@ -36,8 +36,8 @@ public class TypeController {
     }
 
     @RequestMapping(path = "crud", method = RequestMethod.POST)
-    public String typesCrud(
-            @ModelAttribute("typesForm") ExpenseTypeForm typeForm,
+    public String typeCrud(
+            @ModelAttribute("typeForm") ExpenseTypeForm typeForm,
             @RequestParam String action) {
        ExpenseType type = new ExpenseType();
         type.setId(typeForm.getId());

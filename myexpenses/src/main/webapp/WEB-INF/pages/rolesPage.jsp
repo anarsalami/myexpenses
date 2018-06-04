@@ -10,13 +10,12 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="assets/css/mainTable.css">
+
         <link rel="stylesheet" type="text/css" href="assets/css/mainForm.css">
         <link rel="stylesheet" type="text/css" href="assets/css/navigation.css">
-        <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" href="assets/css/responsive.css">
-
+        <link rel="stylesheet" type="text/css" href="assets/css/util.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <title>Roles</title>
 
@@ -32,6 +31,7 @@
             <div id="content">
 
                 <nav class="navbar navbar-default">
+
                     <div class="container-fluid">
 
                         <div class="navbar-header">
@@ -40,18 +40,19 @@
                             </button>
                         </div>
                     </div>
+
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
                         <div class="wrap-table100">
-                            <form:form    modelAttribute="rolesForm" 
+                            <form:form    modelAttribute="roleForm" 
                                           action="roles/crud" 
                                           method="POST"
-                                          cssClass="contact100-form"
+                                          class="contact100-form"
                                           >
 
-                                <div class="wrap-input100 rs1-wrap-input100 validate-input" >
-                                    <form:input path="Name" class="form-control" class="input100" placeholder="Enter role name"/>
-                                    <span class="focus-input100"></span>
+                                <div class="wrap-form-control rs1-wrap-form-control" >
+                                    <form:input path="Name" class="form-control"  placeholder="Enter role name"/>
+                                    <span class="focus-form-control"></span>
                                 </div>
 
                                 <div class="container-contact100-form-btn">
@@ -79,9 +80,7 @@
                                 </div>
                             </form:form>
 
-
-
-                            <div class="table100 ver1 m-b-110">
+                            <div class="table100 ver5 m-b-110">
                                 <table data-vertable="ver3">
                                     <thead>
                                         <tr class="row100 head">
@@ -104,32 +103,32 @@
                         </div>
 
                     </div> 
+
+
+
+                </nav>
+
             </div>
-
-
-        </nav>
-
-
-    </div>
+        </div>
 
 
 
-    <script src="assets/js/main.js"></script>
-    <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
-    <!-- Bootstrap Js CDN -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="assets/js/main.js"></script>
+        <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+        <!-- Bootstrap Js CDN -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-    <script type="text/javascript">
+        <script type="text/javascript">
                                                 $(document).ready(function () {
                                                     $('#sidebarCollapse').on('click', function () {
                                                         $('#sidebar').toggleClass('active');
                                                     });
                                                 });
-    </script>
-    <script>
-        function setId(id) {
-            document.getElementById("idElement").value = id;
-        }
-    </script>
-</body>
+        </script>
+        <script>
+            function setId(id) {
+                document.getElementById("idElement").value = id;
+            }
+        </script>
+    </body>
 </html>
