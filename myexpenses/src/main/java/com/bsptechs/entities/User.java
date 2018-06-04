@@ -5,22 +5,16 @@
  */
 package com.bsptechs.entities;
 
-import com.bsptechs.entities.Authorities;
 import java.io.Serializable;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -34,7 +28,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Anar Salami
+ * @author Kanan
  */
 @Entity
 @Table(name = "user")
@@ -42,13 +36,14 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u")
     , @NamedQuery(name = "User.findById", query = "SELECT u FROM User u WHERE u.id = :id")
+    , @NamedQuery(name = "User.findByLastLoginDate", query = "SELECT u FROM User u WHERE u.lastLoginDate = :lastLoginDate")
     , @NamedQuery(name = "User.findByName", query = "SELECT u FROM User u WHERE u.name = :name")
     , @NamedQuery(name = "User.findBySurname", query = "SELECT u FROM User u WHERE u.surname = :surname")
-    , @NamedQuery(name = "User.findByUsername", query = "SELECT u FROM User u WHERE u.username = :username")
     , @NamedQuery(name = "User.findByPassword", query = "SELECT u FROM User u WHERE u.password = :password")
-    , @NamedQuery(name = "User.findByLastLoginDate", query = "SELECT u FROM User u WHERE u.lastLoginDate = :lastLoginDate")
     , @NamedQuery(name = "User.findByRegDate", query = "SELECT u FROM User u WHERE u.regDate = :regDate")
-    , @NamedQuery(name = "User.findByUnregDate", query = "SELECT u FROM User u WHERE u.unregDate = :unregDate")})
+    , @NamedQuery(name = "User.findByUnregDate", query = "SELECT u FROM User u WHERE u.unregDate = :unregDate")
+    , @NamedQuery(name = "User.findByUsername", query = "SELECT u FROM User u WHERE u.username = :username")
+    , @NamedQuery(name = "User.findByEnabled", query = "SELECT u FROM User u WHERE u.enabled = :enabled")})
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -57,6 +52,9 @@ public class User implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
+    @Column(name = "last_login_date")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date lastLoginDate;
     @Size(max = 15)
     @Column(name = "name")
     private String name;
@@ -65,34 +63,26 @@ public class User implements Serializable {
     private String surname;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 15)
-    @Column(name = "username")
-    private String username;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 15)
+    @Size(min = 1, max = 150)
     @Column(name = "password")
     private String password;
-    @Column(name = "last_login_date")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date lastLoginDate;
     @Column(name = "reg_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date regDate;
     @Column(name = "unreg_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date unregDate;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId", fetch = FetchType.LAZY)
-    private List<UserRole> userRoleList;
-    @JoinColumn(name = "role_id", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private Role roleId;
-
-     @Column(name = "ENABLED", nullable = false)
-  private boolean enabled;
-
-  @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-  private Set<Authorities> authorities = new HashSet<>();
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 15)
+    @Column(name = "username")
+    private String username;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "enabled")
+    private boolean enabled;
+    @OneToMany(mappedBy = "userId", fetch = FetchType.LAZY)
+    private List<Authorities> authoritiesList;
 
     public User() {
     }
@@ -101,10 +91,11 @@ public class User implements Serializable {
         this.id = id;
     }
 
-    public User(Integer id, String username, String password) {
+    public User(Integer id, String password, String username, boolean enabled) {
         this.id = id;
-        this.username = username;
         this.password = password;
+        this.username = username;
+        this.enabled = enabled;
     }
 
     public Integer getId() {
@@ -113,6 +104,14 @@ public class User implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Date getLastLoginDate() {
+        return lastLoginDate;
+    }
+
+    public void setLastLoginDate(Date lastLoginDate) {
+        this.lastLoginDate = lastLoginDate;
     }
 
     public String getName() {
@@ -131,28 +130,12 @@ public class User implements Serializable {
         this.surname = surname;
     }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
     public String getPassword() {
         return password;
     }
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public Date getLastLoginDate() {
-        return lastLoginDate;
-    }
-
-    public void setLastLoginDate(Date lastLoginDate) {
-        this.lastLoginDate = lastLoginDate;
     }
 
     public Date getRegDate() {
@@ -171,24 +154,15 @@ public class User implements Serializable {
         this.unregDate = unregDate;
     }
 
-    @XmlTransient
-    public List<UserRole> getUserRoleList() {
-        return userRoleList;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserRoleList(List<UserRole> userRoleList) {
-        this.userRoleList = userRoleList;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public Role getRoleId() {
-        return roleId;
-    }
-
-    public void setRoleId(Role roleId) {
-        this.roleId = roleId;
-    }
-
-    public boolean isEnabled() {
+    public boolean getEnabled() {
         return enabled;
     }
 
@@ -196,17 +170,15 @@ public class User implements Serializable {
         this.enabled = enabled;
     }
 
-    public Set<Authorities> getAuthorities() {
-        return authorities;
+    @XmlTransient
+    public List<Authorities> getAuthoritiesList() {
+        return authoritiesList;
     }
 
-    public void setAuthorities(Set<Authorities> authorities) {
-        this.authorities = authorities;
+    public void setAuthoritiesList(List<Authorities> authoritiesList) {
+        this.authoritiesList = authoritiesList;
     }
 
-    
-    
-    
     @Override
     public int hashCode() {
         int hash = 0;

@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
 @Service("userDetailsService")
@@ -29,10 +30,10 @@ public class UserDetailsServiceImp implements UserDetailsService {
 
             builder = org.springframework.security.core.userdetails.User.withUsername(username);
 
-            builder.disabled(!user.isEnabled());
+            builder.disabled(!user.getEnabled());
             builder.password(user.getPassword());
             
-            String[] authoritiesArr = getAuthorityArr(user.getAuthorities());
+            String[] authoritiesArr = getAuthorityArr(user.getAuthoritiesList());
             builder.authorities(authoritiesArr);
         } else {
             throw new UsernameNotFoundException("User not found.");
@@ -40,7 +41,7 @@ public class UserDetailsServiceImp implements UserDetailsService {
         return builder.build();
     }
 
-    public static String[] getAuthorityArr(Set<Authorities> authorities) {
+    public static String[] getAuthorityArr(List<Authorities> authorities) {
 
         String[] authoritiesArr = new String[authorities.size()];
         Iterator<Authorities> iter = authorities.iterator();

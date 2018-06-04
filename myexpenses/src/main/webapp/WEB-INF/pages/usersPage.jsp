@@ -62,15 +62,7 @@ Document   : welcome
                                     <form:input path="password" class="form-control" type="password"  placeholder="Enter user password"/>
                                     <span class="focus-form-control"></span>
                                 </div>
-                                <div class="col-md-4 validate-input">
-                                    <form:select path="roleId" class="form-control">
-                                        <c:forEach var="userRole" items="${userRoles}">
-                                            <form:option value="${userRole.id}" class="wrap-form-control">${userRole.name}
-                                            </form:option>
-                                        </c:forEach>
-                                    </form:select>
-                                    <span class="shadow-input1"></span>
-                                </div>
+                                
 
                             </div>
 
@@ -110,8 +102,6 @@ Document   : welcome
                                         <th class="column100 " data-column="column3">Surname</th>
                                         <th class="column100 " data-column="column4">Username</th>
                                         <th class="column100 " data-column="column5">Password</th>
-                                        <th class="column100 " data-column="column6">Role</th>
-
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -123,22 +113,12 @@ Document   : welcome
                                             <td class="column100" data-column="column3"><c:out value="${user.surname}"/></td>
                                             <td class="column100 " data-column="column4"><c:out value="${user.username}"/></td>
                                             <td class="column100 " data-column="column5"><c:out value="${user.password}"/></td>
-                                            <td class="column100" data-column="column6">
-                                                <c:forEach var="userRole" items="${user.userRoleList}">
-                                                    <c:out value="${userRole.roleId.name}"/><br/>
-                                                </c:forEach>
-                                            </td>
                                         </tr>
                                     </c:forEach>
                                 </tbody>
                             </table>
                         </div>
                     </div>
-
-
-
-
-
                 </nav>
             </div>
 

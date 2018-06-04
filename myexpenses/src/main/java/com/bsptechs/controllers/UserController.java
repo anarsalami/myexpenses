@@ -8,8 +8,6 @@ package com.bsptechs.controllers;
 import com.bsptechs.beans.RoleForm;
 import com.bsptechs.beans.UserForm;
 import com.bsptechs.entities.User;
-import com.bsptechs.entities.Role;
-import com.bsptechs.entities.UserRole;
 import com.bsptechs.service.inter.IUserService;
 import java.util.List;
 import java.util.Map;
@@ -19,7 +17,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import com.bsptechs.service.inter.IRoleService;
+import java.util.ArrayList;
 
 @Controller
 @RequestMapping("users")
@@ -28,16 +26,13 @@ public class UserController {
     @Autowired
     IUserService userService;
 
-    @Autowired
-    IRoleService userRoleService;
-
     @RequestMapping(method = RequestMethod.GET)
     public String userPage(Map<String, Object> model, @ModelAttribute("userForm") UserForm userForm) {
         List<User> users = userService.selectAll();
         model.put("users", users);
-        List<Role> userRoles = userRoleService.selectAll();
-        model.put("userRoles", userRoles);
-        System.out.println("userroles size="+userRoles.size());
+        //List<Role> userRoles = userRoleService.selectAll();
+        model.put("userRoles", new ArrayList<>());
+//        System.out.println("userroles size="+userRoles.size());
         System.out.println("users size= "+users.size());
         return "usersPage";
     }
@@ -51,7 +46,7 @@ public class UserController {
         user.setSurname(userForm.getSurname());
         user.setUsername(userForm.getUsername());
         user.setPassword(userForm.getPassword());
-        user.setRoleId(new UserRole().getRoleId());
+//        user.setRoleId(new UserRole().getRoleId());
         if (action != null) {
             if (action.equalsIgnoreCase("add")) {
                 userService.insert(user);
