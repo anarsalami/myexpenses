@@ -64,7 +64,7 @@ public class ExpenseCategoryDAO implements IExpenseCategoryDAO{
 //
     @Override
     public List<ExpenseCategory> selectAll() {
-        Query category = em.createQuery("select u from ExpenseCategory u", ExpenseCategoryDAO.class);//JPA
+        Query category = em.createQuery("select u from ExpenseCategory u", ExpenseCategory.class);//JPA
         List<ExpenseCategory> list = category.getResultList();
         return list;
     }

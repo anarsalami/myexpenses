@@ -49,7 +49,7 @@
                                           >
 
                                 <div class="wrap-form-control rs1-wrap-form-control" >
-                                    <form:input path="name" class="form-control"  placeholder="Enter role name"/>
+                                    <form:input path="name" class="form-control"  placeholder="Enter type name"/>
                                     <span class="focus-form-control"></span>
                                 </div>
 

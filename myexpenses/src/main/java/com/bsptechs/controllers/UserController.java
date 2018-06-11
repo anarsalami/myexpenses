@@ -5,7 +5,6 @@
  */
 package com.bsptechs.controllers;
 
-import com.bsptechs.beans.RoleForm;
 import com.bsptechs.beans.UserForm;
 import com.bsptechs.entities.User;
 import com.bsptechs.service.inter.IUserService;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import java.util.ArrayList;
 
 @Controller
 @RequestMapping("users")
@@ -30,10 +28,8 @@ public class UserController {
     public String userPage(Map<String, Object> model, @ModelAttribute("userForm") UserForm userForm) {
         List<User> users = userService.selectAll();
         model.put("users", users);
-        //List<Role> userRoles = userRoleService.selectAll();
-        model.put("userRoles", new ArrayList<>());
-//        System.out.println("userroles size="+userRoles.size());
-        System.out.println("users size= "+users.size());
+
+        System.out.println("users size= " + users.size());
         return "usersPage";
     }
 
@@ -52,13 +48,13 @@ public class UserController {
                 userService.insert(user);
             } else if (action.equalsIgnoreCase("delete")) {
                 userService.delete(userForm.getId());
-            } else if (action.equalsIgnoreCase("update")){
+            } else if (action.equalsIgnoreCase("update")) {
                 user.setId(userForm.getId());
                 userService.update(user);
             }
         }
-        System.out.println("id="+userForm.getId());
-        System.out.println("userform="+userForm);
+        System.out.println("id=" + userForm.getId());
+        System.out.println("userform=" + userForm);
 
         return "redirect: /myexpenses/users";
     }

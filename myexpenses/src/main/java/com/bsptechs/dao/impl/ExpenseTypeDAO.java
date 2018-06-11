@@ -7,7 +7,6 @@ package com.bsptechs.dao.impl;
 
 import com.bsptechs.dao.inter.IExpenseTypeDAO;
 import com.bsptechs.entities.ExpenseType;
-import com.bsptechs.entities.User;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -64,7 +63,7 @@ public class ExpenseTypeDAO implements IExpenseTypeDAO{
 //
     @Override
     public List<ExpenseType> selectAll() {
-        Query type = em.createQuery("select u from User u", ExpenseTypeDAO.class);//JPA
+        Query type = em.createQuery("select u from ExpenseType u", ExpenseType.class);//JPA
         List<ExpenseType> list = type.getResultList();
         return list;
     }

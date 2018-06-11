@@ -12,8 +12,8 @@
         <div class="wrapper fadeInDown">
             <div id="formContent">
                 <!-- Tabs Titles -->
-                <h2 ><a href="login.jsp">Log in</a> </h2>
-                <h2 ><a href="sign.jsp" >Sign up</a></h2>
+                <h2 ><a href="/login">Log in</a> </h2>
+                <h2 ><a href="/sign" >Sign up</a></h2>
 
                 <!-- Icon -->
                 <div class="fadeIn first">
@@ -21,13 +21,16 @@
                 </div>
 
                 <!-- Login Form -->
-                <form>
-                    <input type="text" id="login" class="fadeIn second" name="name" placeholder="Name">
-                    <input type="text" id="password" class="fadeIn third" name="surname" placeholder="Surname">
-                    <input type="text" id="password" class="fadeIn fourth" name="username" placeholder="Username">
-                    <input type="text" id="password" class="fadeIn fifth" name="password" placeholder="Password">
-                    <input type="submit" class="fadeIn sixth" value="Log In">
-                </form>
+                <form:form  modelAttribute="userForm"
+                            action="sign"
+                            method="POST">
+                  
+                    <form:input type="text"  class="fadeIn second" path="name" placeholder="Name"/>
+                    <form:input type="text"  class="fadeIn third" path="surname" placeholder="Surname"/>
+                    <form:input type="text"  class="fadeIn fourth" path="username" placeholder="Username"/>
+                    <form:input type="text"  class="fadeIn fifth" path="password" placeholder="Password"/>
+                    <input type="submit" class="fadeIn sixth" name="action" value="LogIn">
+                </form:form>
 
                 <!-- Remind Passowrd -->
                

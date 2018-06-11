@@ -22,14 +22,10 @@
                 Pages
             </a>
             <ul class="collapse list-unstyled" id="pageSubmenu">
-                <li><a href="#">Users</a></li>
-                <li><a href="#">Expense Category</a></li>
-                <li><a href="#">Expense Type</a></li>
-                <li>
-                    <spring:url value="roles" var="Roles"/>
-                   
-                </li>
-                <li><a href="#">Expense</a></li>
+                <li><a href="users">Users</a></li>
+                <li><a href="categories">Expense Category</a></li>
+                <li><a href="types">Expense Type</a></li>
+                <li><a href="#">Authorities</a></li>
             </ul>
         </li>
 

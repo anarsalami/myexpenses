@@ -25,10 +25,10 @@
 
 
         <div class="wrapper">
-             Sidebar Holder 
+             
             <%@include file="header.jsp" %>
 
-             Page Content Holder 
+            
             <div id="content">
 
                 <nav class="navbar navbar-default">
@@ -46,12 +46,12 @@
                             <form:form   modelAttribute="categoryForm" 
                                          action="categories/crud" 
                                          method="POST"
-                                         cssClass="contact100-form"                                        
+                                         class="contact100-form"                                        
                                          >
 
-                                <div class="wrap-input100 rs1-wrap-input100 validate-input" >
+                                <div class="wrap-form-control rs1-wrap-form-control validate-input" >
                                     <form:input path="name" class="form-control"  placeholder="Enter category name"/>
-                                    <span class="focus-input100"></span>
+                                    <span class="focus-form-control"></span>
                                 </div>
 
                                 <div class="container-contact100-form-btn">
@@ -92,7 +92,7 @@
                                     </thead>
                                     <tbody>
 
-                                        <c:forEach var="categories" items="${categories}">
+                                        <c:forEach var="categories" items="${category}">
                                             <tr class="row100" onclick="setId(<c:out value="${categories.id}"/>)">
                                                 <td class="column100" data-column="column1"><c:out value="${categories.id}"/></td>
                                                 <td class="column100" data-column="column2"><c:out value="${categories.name}"/></td>

@@ -12,8 +12,10 @@ import lombok.Data;
  * @author Anar Salami
  */
 @Data
-public class RoleForm {
-
+public class SignForm {
     private Integer id;
     private String name;
+    private String surname;
+    private String username;
+    private String password;
 }

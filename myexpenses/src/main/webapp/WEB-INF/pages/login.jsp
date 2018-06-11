@@ -18,17 +18,17 @@
                 
 
 
-                <h2 ><a href="login.jsp" >Log in</a> </h2>
-                <h2 ><a href="sign.jsp" >Sign up</a></h2>
+                <h2 ><a href="/login" >Log in</a> </h2>
+                <h2 ><a href="/sign" >Sign up</a></h2>
 
             
                 <div class="fadeIn first">
                     <img src="assets/images/background/logo.png" id="icon" alt="User Icon" />
                 </div>
 
-                <form:form action='<spring:url value="/loginAction"/>' method="post">
-                    <input type="text" id="username" class="fadeIn second" name="username" placeholder="Username">
-                    <input type="text" id="password" class="fadeIn third" name="password" placeholder="Password">
+                <form:form action='<spring:url value="/login"/>' method="post">
+                    <form:input type="text" class="fadeIn second" path="username" placeholder="Username"/>
+                    <input:password  class="fadeIn third" path="password" placeholder="Password"/>
                     <input type="submit" class="fadeIn fourth" value="Log In">
                 </form:form>
 

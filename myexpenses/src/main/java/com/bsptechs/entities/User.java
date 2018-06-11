@@ -52,10 +52,7 @@ public class User implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @Column(name = "last_login_date")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date lastLoginDate;
-    @Size(max = 15)
+
     @Column(name = "name")
     private String name;
     @Size(max = 15)
@@ -64,6 +61,10 @@ public class User implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 150)
+    @Column(name = "username")
+    private String username;
+    @Basic(optional = false)
+    @NotNull
     @Column(name = "password")
     private String password;
     @Column(name = "reg_date")
@@ -75,10 +76,11 @@ public class User implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 15)
-    @Column(name = "username")
-    private String username;
-    @Basic(optional = false)
-    @NotNull
+    @Column(name = "last_login_date")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date lastLoginDate;
+    @Size(max = 15)
+
     @Column(name = "enabled")
     private boolean enabled;
     @OneToMany(mappedBy = "userId", fetch = FetchType.LAZY)
@@ -203,5 +205,5 @@ public class User implements Serializable {
     public String toString() {
         return "com.bsptechs.entities.User[ id=" + id + " ]";
     }
-    
+
 }
